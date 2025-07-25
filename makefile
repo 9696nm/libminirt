@@ -10,28 +10,43 @@
 #                                                                              #
 # **************************************************************************** #
 
-TARGET			=	miniRT
-PROJECT_NAME	=	miniRT
+# MiniRT Library
+TARGET			=	libmrt.a
+PROJECT_NAME	=	Libminirt
 
 MAKEFLAGS		+=	--no-print-directory
 
+.DEFAULT_GOAL	:=	all
+
+
 # -compile rule-
 CC				=	gcc
-WARNING_FLAG	=	-Wall -Wextra -Werror -Wshadow
+WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
 OPT_FLAGS		=	-O0
-INC_PATHS		=	-I$(DEP_INCLUDES) -Iinternal
-LINK_LIBS		=
+INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 DEPEND_FLAGS	=	-MMD -MP
 
-# -target-
-SRCS_DIR		=	srcs/
-OBJS_DIR 		=	objs/
+AR				=	ar
+ARFLAGS			=	rcs
 
-SRC_FILES		=	mrt_destroy.c \
+# -target dir-
+INC_DIR			=	internal/ $(DEP_INCLUDES)
+SRC_DIR			=	srcs/
+OBJ_DIR 		=	objs/
+
+# -sources-
+SRCS			=	mrt_destroy.c \
 					mrt_init.c \
 					mrt_set_value.c
-OBJS 			=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRC_FILES))
-DEPS			=	$(patsubst %.c, $(OBJS_DIR)%.d, $(SRC_FILES))
+
+TARGET_SRCS		=	$(SRCS)
+
+# -objects-
+OBJS 			=	$(patsubst %.c, $(OBJ_DIR)%.o, $(TARGET_SRCS))
+DEPS			=	$(patsubst %.c, $(OBJ_DIR)%.d, $(TARGET_SRCS))
+
+# -include-
+-include $(DEPS)
 
 # -color code-
 RED				=	"\033[1;31m"
@@ -43,41 +58,41 @@ RESET			=	"\033[0m"
 
 
 # --rule--
--include $(DEPS)
+all: $(TARGET)
 
-all: $(LIBFT_DIR) $(MLX_DIR) $(TARGET)
+$(TARGET): $(OBJS)
+	$(AR) $(ARFLAGS) $@ $^
+	@echo $(GREEN)"--- $(PROJECT_NAME) Compiling Sccusse $(COMPILE_TYPE)! ---"$(RESET)
 
-$(TARGET): $(OBJS) $(LIBFTA) $(LIBMLXA)
-	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $^ -o $@ $(LINK_LIBS)
-	@echo $(GREEN)"--- $(PROJECT_NAME) $(COMPILE_TYPE) Compiling Sccusse! ---"$(RESET)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
-	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
-
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 bonus:
 	@$(MAKE) all COMPILE_TYPE=bonus
 
 clean:
-	@if [ -d $(OBJS_DIR) ]; then \
-		rm -rf $(OBJS_DIR); \
-		echo $(RED)"$(PROJECT_NAME) $(OBJS_DIR) deleted!"$(RESET); \
+	@if [ -d $(OBJ_DIR) ]; then \
+		rm -rf $(OBJ_DIR); \
+		echo $(RED)"$(PROJECT_NAME) $(OBJ_DIR) has been deleted !"$(RESET); \
 	else \
-		echo $(CYAN)"$(PROJECT_NAME) object is already deleted."$(RESET); \
+		echo $(CYAN)"$(PROJECT_NAME) object has already been deleted."$(RESET); \
 	fi
 
+ifeq ($(SKIP_CLEAN), 1)
+fclean:
+else
 fclean: clean
+endif
 	@if [ -f $(TARGET) ]; then \
 		rm -f $(TARGET); \
-		echo $(RED)"$(PROJECT_NAME) $(TARGET) deleted!"$(RESET); \
+		echo $(RED)"$(PROJECT_NAME) $(TARGET) has been deleted !"$(RESET); \
 	else \
-		echo $(CYAN)"$(PROJECT_NAME) archive is already deleted."$(RESET); \
+		echo $(CYAN)"$(PROJECT_NAME) archive has already been deleted."$(RESET); \
 	fi
 
 re:	fclean all
-
-.DEFAULT_GOAL := all
 
 .PHONY:	all bonus clean fclean re

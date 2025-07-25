@@ -21,7 +21,7 @@ int		mrt_set_value(void *vars, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (perrturn(-1, path));
-	
+	(void)vars;
 	close(fd);
 	return (index);
 }
