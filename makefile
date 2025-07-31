@@ -6,7 +6,7 @@
 #    By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 15:14:11 by hana/hmori        #+#    #+#              #
-#    Updated: 2025/07/08 18:55:11 by hana/hmori       ###   ########.fr        #
+#    Updated: 2025/07/26 13:40:55 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
-	@echo $(GREEN)"--- $(PROJECT_NAME) Compiling Sccusse $(COMPILE_TYPE)! ---"$(RESET)
+	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@

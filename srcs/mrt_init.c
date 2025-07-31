@@ -12,10 +12,10 @@
 
 #include "minirt_int.h"
 
-void	*mrt_init(void)
+t_scene	*mrt_init(void)
 {
-	void	*args;
+	t_scene	*vars;
 
-	args = malloc(0); //
-	return (args);
+	vars = malloc(sizeof(t_scene));
+	return (vars);
 }
