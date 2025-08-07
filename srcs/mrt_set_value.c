@@ -10,23 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-
-#include "string.h"
-#include "ft/string.h"
 #include "minirt_int.h"
 
-const t_prefix_handler g_handlers[] = {
-	{"A", handle_A},
-	{"C", handle_C},
-	{"L", handle_L},
-	{"pl", handle_pl},
-	{"sp", handle_sp},
-	{"cy", handle_cy},
-	{NULL, handle_default} /* feedback */
-};
-
-bool	has_extension(const char *path, const char *ext)
+static bool	has_extension(const char *path, const char *ext)
 {
 	const char	*filename;
 	const char	*dot;
@@ -44,37 +30,73 @@ bool	has_extension(const char *path, const char *ext)
 	return (ft_strcmp(dot, ext) == 0);
 }
 
-// void	dispatch_prefix(const char *input) {
-// 	int	i = 0;
-
-// 	while (g_handlers[i].prefix != NULL) {
-// 		if (strcmp(g_handlers[i].prefix, input) == 0) {
-// 			g_handlers[i].handler();
-// 			return;
-// 		}
-// 		i++;
-// 	}
-// 	/* 対応なし → default handler */
-// 	g_handlers[i].handler();
-// }
-
-int	check_prefix()
+static int	extract_valid_prefix(const char *buf, t_scene *vars,
+	const t_pfx_hdl *handlers)
 {
+	unsigned int	match_idx;
 
+	match_idx = 0;
+	while (handlers[match_idx].pfx)
+	{
+		if (ft_strncmp(buf, handlers[match_idx].pfx, 1) == 0)
+		{
+			if (ft_isupper(*buf) && vars->pfx_used_bits & (1U << match_idx))
+				return (ret_errmsg(-1, ERR_MULTIPLE_UNIQUE_PREFIXES));
+			vars->pfx_used_bits |= (1U << match_idx);
+			return ((int)match_idx);
+		}
+		match_idx++;
+	}
+	if (*buf == '\n')
+		return ((int)match_idx);
+	return (ret_errmsg(-1, ERR_NO_MATCHING_PREFIX));
 }
 
-int		mrt_set_value(t_scene *vars, char *path)
+int	mrt_int_set_array(t_scene *vars, int fd, const t_pfx_hdl *handlers)
 {
-	int	fd;
-	int	index;
+	int		pfx_type;
+	int		scene_cnt;
+	char	*buf;
 
-	index = 0;
+	scene_cnt = -1;
+	buf = get_next_line(fd);
+	if (buf == NULL)
+		return (0);
+	pfx_type = extract_valid_prefix(buf, vars, handlers);
+	if (-1 < pfx_type)
+	{
+		if (handlers[(unsigned int)pfx_type].hdl(vars, buf))
+			scene_cnt = mrt_int_set_array(vars, fd, handlers);
+		else
+			perror("handler");
+		if (-1 < scene_cnt)
+			scene_cnt++;
+	}
+	free(buf);
+	return (scene_cnt);
+}
+
+int	mrt_set_value(t_scene *vars, char *path)
+{
+	int				fd;
+	int				scene_cnt;
+	const t_pfx_hdl	handlers[] = {
+	{"A", handle_a},
+	{"C", handle_c},
+	{"L", handle_l},
+	{"pl", handle_pl},
+	{"sp", handle_sp},
+	{"cy", handle_cy},
+	{NULL, handle_default} /* feedback */
+	};
+
+	scene_cnt = 0;
 	if (has_extension(path, RT_FILE_EXTENSION) == false)
 		return (ret_errmsg(-1, ERR_INVALID_EXTENSION));
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (perrturn(-1, path));
-	(void)vars;
+	scene_cnt = mrt_int_set_array(vars, fd, handlers);
 	close(fd);
-	return (index);
+	return (scene_cnt);
 }

@@ -15,10 +15,14 @@
 
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 
+# include "ft/ctype.h"
+# include "ft/string.h"
 # include "ft/stdio.h"
+# include "get_next_line.h"
 # include "libarith.h"
 
 # include "scene_types.h"
@@ -30,12 +34,10 @@
 /* error messege */
 # define ERR_INVALID_EXTENSION "Error: scene file must have a '.rt' \
 extension.\n"
-
-typedef struct s_prefix_handler
-{
-	const char	*prefix;
-	void		(*handler)(void);
-}	t_prefix_handler;
+# define ERR_NO_MATCHING_PREFIX "Error: no matching prefix found \
+for the given input.\n"
+# define ERR_MULTIPLE_UNIQUE_PREFIXES "Error: multiple mutually-exclusive \
+prefixes detected.\n"
 
 typedef struct s_scene
 {
@@ -43,16 +45,23 @@ typedef struct s_scene
 	unsigned int	num_lgt;
 	t_obj_base		*objects[MAX_OBJECTS];
 	unsigned int	num_obj;
+	u_int32_t		pfx_used_bits;
 
 }	t_scene;
 
-/*  */
-void	handle_A(void);
-void	handle_C(void);
-void	handle_L(void);
-void	handle_pl(void);
-void	handle_sp(void);
-void	handle_cy(void);
-void	handle_default(void);
+typedef struct s_prefix_handler
+{
+	const char	*pfx;
+	int			(*hdl)(t_scene *, char *);
+}	t_pfx_hdl;
+
+/* mrt_int_handler.c */
+int	handle_a(t_scene *vars, char *str);
+int	handle_c(t_scene *vars, char *str);
+int	handle_l(t_scene *vars, char *str);
+int	handle_pl(t_scene *vars, char *str);
+int	handle_sp(t_scene *vars, char *str);
+int	handle_cy(t_scene *vars, char *str);
+int	handle_default(t_scene *vars, char *str);
 
 #endif /* MINIRT_INT_H */

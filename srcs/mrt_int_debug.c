@@ -1,26 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt_destroy.c                                      :+:      :+:    :+:   */
+/*   mrt_int_debug.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/26 13:41:19 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/26 13:41:23 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/08/07 13:02:40 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/08/07 13:02:41 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_int.h"
-
-void	mrt_destroty(t_scene *vars)
-{
-	if (vars == NULL)
-		return ;
-	printf("lgt:%u\n", vars->num_lgt);
-	printf("obj:%u\n", vars->num_obj);
-	while (vars->num_lgt--)
-		free(vars->lights[vars->num_lgt]);
-	while (vars->num_obj--)
-		free(vars->objects[vars->num_obj]);
-	free(vars);
-}

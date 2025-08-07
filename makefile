@@ -21,7 +21,7 @@ MAKEFLAGS		+=	--no-print-directory
 
 # -compile rule-
 CC				=	gcc
-WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
+# WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
 OPT_FLAGS		=	-O0
 INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 DEPEND_FLAGS	=	-MMD -MP
@@ -37,7 +37,9 @@ OBJ_DIR 		=	objs/
 # -sources-
 SRCS			=	mrt_destroy.c \
 					mrt_init.c \
-					mrt_set_value.c
+					mrt_int_lgt_handler.c \
+					mrt_int_obj_handler.c \
+					mrt_set_value.c \
 
 TARGET_SRCS		=	$(SRCS)
 
