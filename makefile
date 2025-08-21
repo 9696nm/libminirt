@@ -37,9 +37,13 @@ OBJ_DIR 		=	objs/
 # -sources-
 SRCS			=	mrt_destroy.c \
 					mrt_init.c \
-					mrt_int_lgt_handler.c \
-					mrt_int_obj_handler.c \
-					mrt_set_value.c \
+					mrt_int_parse_handle_cam.c \
+					mrt_int_parse_handle_lgt.c \
+					mrt_int_parse_handle_obj.c \
+					mrt_int_parse_str_struct.c \
+					mrt_int_parse_str_value.c \
+					mrt_read_file.c \
+					mrt_int_debug.c #debug!!!! \
 
 TARGET_SRCS		=	$(SRCS)
 

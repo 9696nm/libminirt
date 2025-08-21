@@ -13,11 +13,9 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-
-
 void	mrt_destroty(void *vars);
 
 void	*mrt_init(void);
-int		mrt_set_value(void *vars, char *path);
+int		mrt_read_file(void *vars, char *path);
 
 #endif /* MINIRT_H */ 

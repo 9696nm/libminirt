@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt_set_value.c                                    :+:      :+:    :+:   */
+/*   mrt_read_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,7 +30,7 @@ static bool	has_extension(const char *path, const char *ext)
 	return (ft_strcmp(dot, ext) == 0);
 }
 
-static int	extract_valid_prefix(const char *buf, t_scene *vars,
+static int	mrt_int_extract_valid_prefix(const char *buf, t_scene *vars,
 	const t_pfx_hdl *handlers)
 {
 	unsigned int	match_idx;
@@ -55,48 +55,50 @@ static int	extract_valid_prefix(const char *buf, t_scene *vars,
 int	mrt_int_set_array(t_scene *vars, int fd, const t_pfx_hdl *handlers)
 {
 	int		pfx_type;
-	int		scene_cnt;
+	int		line_cnt;
 	char	*buf;
 
-	scene_cnt = -1;
+	line_cnt = -1;
 	buf = get_next_line(fd);
 	if (buf == NULL)
+	{
+		if (errno == ENOMEM)
+			return (line_cnt);
 		return (0);
-	pfx_type = extract_valid_prefix(buf, vars, handlers);
+	}
+	pfx_type = mrt_int_extract_valid_prefix(buf, vars, handlers);
 	if (-1 < pfx_type)
 	{
 		if (handlers[(unsigned int)pfx_type].hdl(vars, buf))
-			scene_cnt = mrt_int_set_array(vars, fd, handlers);
-		else
-			perror("handler");
-		if (-1 < scene_cnt)
-			scene_cnt++;
+			line_cnt = mrt_int_set_array(vars, fd, handlers);
+		else if (errno == 0)
+			dprintf(STDERR_FILENO, ERR_INVALID_VALUE, buf);
+		if (-1 < line_cnt)
+			line_cnt++;
 	}
 	free(buf);
-	return (scene_cnt);
+	return (line_cnt);
 }
 
-int	mrt_set_value(t_scene *vars, char *path)
+int	mrt_read_file(t_scene *vars, char *path)
 {
 	int				fd;
-	int				scene_cnt;
+	int				line_cnt;
 	const t_pfx_hdl	handlers[] = {
-	{"A", handle_a},
-	{"C", handle_c},
-	{"L", handle_l},
-	{"pl", handle_pl},
-	{"sp", handle_sp},
-	{"cy", handle_cy},
-	{NULL, handle_default} /* feedback */
-	};
+	{mrt_int_parse_handle_a, "A"},
+	{mrt_int_parse_handle_c, "C"},
+	{mrt_int_parse_handle_l, "L"},
+	{mrt_int_parse_handle_pl, "pl"},
+	{mrt_int_parse_handle_sp, "sp"},
+	{mrt_int_parse_handle_cy, "cy"},
+	{mrt_int_parse_handle_default, NULL} /* feedback */};
 
-	scene_cnt = 0;
 	if (has_extension(path, RT_FILE_EXTENSION) == false)
 		return (ret_errmsg(-1, ERR_INVALID_EXTENSION));
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (perrturn(-1, path));
-	scene_cnt = mrt_int_set_array(vars, fd, handlers);
+		return (fd);
+	line_cnt = mrt_int_set_array(vars, fd, handlers);
 	close(fd);
-	return (scene_cnt);
+	return (line_cnt);
 }

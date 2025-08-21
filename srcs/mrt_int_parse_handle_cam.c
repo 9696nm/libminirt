@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt_int_lgt_handler.c                              :+:      :+:    :+:   */
+/*   mrt_int_parse_handle_cam.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:02:43 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/08/07 13:02:44 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/08/18 01:56:26 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_int.h"
 
-int	handle_a(t_scene *vars, char *str __attribute__((unused)))
+int	mrt_int_parse_handle_c(t_scene *vars, const char *str)
 {
-	t_amb_lgt	*new;
+	t_cam_persp	*new;
 
-	new = malloc(sizeof(t_amb_lgt));
+	new = malloc(sizeof(t_cam_persp));
 	if (new == NULL)
 		return (false);
-	vars->lights[vars->num_lgt] = (t_lgt_base *)new;
-	vars->num_lgt++;
+	vars->cameras[vars->num_cam] = (t_base_cam *)new;
+	vars->num_cam++;
 	return (true);
 }
 
-int	handle_l(t_scene *vars, char *str __attribute__((unused)))
-{
-	t_amb_lgt	*new;
-
-	new = malloc(sizeof(t_amb_lgt));
-	if (new == NULL)
-		return (false);
-	vars->lights[vars->num_lgt] = (t_lgt_base *)new;
-	vars->num_lgt++;
-	return (true);
-}
-
-int	handle_default(t_scene *vars __attribute__((unused)),
-	char *str __attribute__((unused)))
+int	mrt_int_parse_handle_default(t_scene *vars __attribute__((unused)),
+	const char *str __attribute__((unused)))
 {
 	return (true);
 }

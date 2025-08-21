@@ -17,79 +17,94 @@
 
 # include "libarith.h"
 
-typedef enum e_light_type
+typedef enum e_type_camera
+{
+	CAM_PERSPECTIVE,
+	CAM_UNKNOWN
+}	t_type_cam;
+
+typedef struct s_base_camera
+{
+	void		(*intersect)(void *self);
+	void		(*destroy)(void *self);
+
+	t_type_cam	type;
+	t_coord3	pos;
+	t_vec3		view;
+}	t_base_cam;
+
+typedef enum e_type_light
 {
 	LGT_AMBIENT,
 	LGT_POINT,
-	LGT_SPOT,
+	// LGT_SPOT,
 	LGT_UNKNOWN
-}	t_lgt_type;
+}	t_type_lgt;
 
-typedef struct s_light_base
+typedef struct s_base_light
 {
-	t_lgt_type		type;
-	u_int8_t		bright;
-	unsigned int	col;
-
 	void			(*intersect)(void *self);
 	void			(*destroy)(void *self);
-}	t_lgt_base;
 
-typedef struct s_ambient_lighting
-{
-	t_lgt_base	base;
-}	t_amb_lgt;
+	t_type_lgt		type;
+	unsigned int	col;
+	unsigned char	bright;
+}	t_base_lgt;
 
-typedef struct s_point_lighting
-{
-	t_lgt_base	base;
-	t_coord3	pos;
-}	t_pt_lgt;
-
-typedef enum e_object_type
+typedef enum e_type_object
 {
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
-	OBJ_QUADRIC,
+	// OBJ_QUADRIC,
 	OBJ_UNKNOWN
-}	t_obj_type;
+}	t_type_obj;
 
-typedef struct s_object_base
+typedef struct s_base_object
 {
-	t_obj_type		type;
-	t_coord3		pos;
-	unsigned int	col;
-
 	void			(*intersect)(void *self);
 	void			(*destroy)(void *self);
-}	t_obj_base;
 
-typedef struct s_camera_object
+	t_type_obj		type;
+	t_coord3		pos;
+	unsigned int	col;
+}	t_base_obj;
+
+typedef struct s_camera_perspective
 {
-	t_obj_base	base;
-	t_vec3		view;
+	t_base_cam	base;
 	float		fov;
-}	t_cam_obj;
+}	t_cam_persp;
 
-typedef struct s_sphere_object
+typedef struct s_light_ambient
 {
-	t_obj_base	base;
+	t_base_lgt	base;
+}	t_lgt_amb;
+
+typedef struct s_light_point
+{
+	t_base_lgt	base;
+	t_coord3	pos;
+}	t_lgt_pt;
+
+typedef struct s_object_sphere
+{
+	t_base_obj	base;
 	float		d;
-}	t_sph_obj;
+}	t_obj_sph;
 
-typedef struct s_plane_object
+typedef struct s_object_plane
 {
-	t_obj_base	base;
+	t_base_obj	base;
 	t_vec3		normal;
-}	t_pln_obj;
+}	t_obj_pln;
 
-typedef struct s_cylinder_object
+typedef struct s_object_cylinder
 {
-	t_obj_base	base;
+	t_base_obj	base;
 	t_vec3		axis;
 	float		d;
 	float		h;
-}	t_cyl_obj;
+}	t_obj_cyl;
 
 #endif /* SCENE_TYPES_H */
