@@ -14,11 +14,21 @@
 
 int	mrt_int_parse_handle_c(t_scene *vars, const char *str)
 {
-	t_cam_persp	*new;
+	t_cam_persp		stk;
+	t_cam_persp		*new;
+	const t_fp_maps	map[] = {
+	{mrt_int_parse_coord, &stk.base.pos},
+	{mrt_int_parse_vecter3, &stk.base.view},
+	{mrt_int_parse_fov, &stk.fov},
+	{NULL, NULL}};
 
+	stk.base.type = CAM_PERSPECTIVE;
+	if (mrt_int_parse_str_split(str + ft_strlen("C"), map) == false)
+		return (false);
 	new = malloc(sizeof(t_cam_persp));
 	if (new == NULL)
 		return (false);
+	ft_memcpy(new, &stk, sizeof(t_cam_persp));
 	vars->cameras[vars->num_cam] = (t_base_cam *)new;
 	vars->num_cam++;
 	return (true);

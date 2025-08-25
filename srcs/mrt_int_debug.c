@@ -59,10 +59,10 @@ void	mrt_int_debug_print_obj(t_base_obj *ptr)
 		return ;
 
 	printf("type   -> %s\n", obj_lst[ptr->type]);
+	printf("coord  -> x:%f y:%f z:%f\n", ptr->pos.x, ptr->pos.y, ptr->pos.z);
 	printf("color  -> ");
 	fflush(stdout);
 	print_bits(&ptr->col, sizeof(ptr->col));
-	printf("coord  -> x:%f y:%f z:%f\n", ptr->pos.x, ptr->pos.y, ptr->pos.z);
 	switch (ptr->type)
 	{
 		case (OBJ_SPHERE):

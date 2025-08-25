@@ -14,10 +14,12 @@
 
 int	mrt_int_parse_handle_a(t_scene *vars, const char *str)
 {
-	t_lgt_amb	stk;
-	t_lgt_amb	*new;
-	t_fp_maps	map[] = {
-	{mrt_int_parse_bright, &stk.base.bright}, {NULL, NULL}};
+	t_lgt_amb		stk;
+	t_lgt_amb		*new;
+	const t_fp_maps	map[] = {
+	{mrt_int_parse_bright, &stk.base.bright},
+	{mrt_int_parse_color, &stk.base.col},
+	{NULL, NULL}};
 
 	stk.base.type = LGT_AMBIENT;
 	if (mrt_int_parse_str_split(str + ft_strlen("A"), map) == false)
@@ -33,11 +35,21 @@ int	mrt_int_parse_handle_a(t_scene *vars, const char *str)
 
 int	mrt_int_parse_handle_l(t_scene *vars, const char *str)
 {
-	t_lgt_amb	*new;
+	t_lgt_pt		stk;
+	t_lgt_pt		*new;
+	const t_fp_maps	map[] = {
+	{mrt_int_parse_coord, &stk.pos},
+	{mrt_int_parse_bright, &stk.base.bright},
+	{mrt_int_parse_color, &stk.base.col},
+	{NULL, NULL}};
 
-	new = malloc(sizeof(t_lgt_amb));
+	stk.base.type = LGT_POINT;
+	if (mrt_int_parse_str_split(str + ft_strlen("L"), map) == false)
+		return (false);
+	new = malloc(sizeof(t_lgt_pt));
 	if (new == NULL)
 		return (false);
+	ft_memcpy(new, &stk, sizeof(t_lgt_pt));
 	vars->lights[vars->num_lgt] = (t_base_lgt *)new;
 	vars->num_lgt++;
 	return (true);

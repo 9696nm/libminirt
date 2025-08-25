@@ -12,41 +12,41 @@
 
 #include "minirt_int.h"
 
-const char	*mrt_int_parse_uint(unsigned int *ptr, const char *str)
-{
-	;
-}
-
-// float	*mrt_int_parse_float(const char *str, char **endptr)
-// {
-// 	char	*tmp;
-// 	float	fl;
-
-// 	if (endptr)
-// 		*endptr = NULL;
-// 	if (str == NULL)
-// 		return (0);
-// 	while (ft_isspace(*str))
-// 		str++;
-// 	fl = strtof(str, &tmp);
-// 	if (fl == NAN || fl < 0.0f || 1.0f < fl)
-// 		return (0);
-// 	if (endptr)
-// 		*endptr = tmp;
-// 	return ((unsigned char)(fl * 255.0f + 0.5f));
-// }
-
 int	mrt_int_parse_bright(const char *str, void *ptr)
 {
-	unsigned char	*bright;
-	float			fl;
+	float	fl;
 
-	if (str == NULL || ft_isdigit(*str) == 0)
+	if (str == NULL || ptr == NULL)
 		return (false);
-	bright = ptr;
 	fl = atof(str);
 	if (fl == NAN || fl < 0.0f || 1.0f < fl)
 		return (false);
-	*bright = (unsigned char)(fl * 255.0f + 0.5f);
+	*(unsigned char *)ptr = (unsigned char)(fl * 255.0f + 0.5f);
+	return (true);
+}
+
+int	mrt_int_parse_ufloat(const char *str, void *ptr)
+{
+	float	fl;
+
+	if (str == NULL || ptr == NULL)
+		return (false);
+	fl = atof(str);
+	if (fl == NAN || fl < 0)
+		return (false);
+	*(float *)ptr = fl;
+	return (true);
+}
+
+int	mrt_int_parse_fov(const char *str, void *ptr)
+{
+	float	fov;
+
+	if (str == NULL || ptr == NULL)
+		return (false);
+	fov = atof(str);
+	if (fov == NAN || fov < 0 || 180 < fov)
+		return (false);
+	*(float *)ptr = fov;
 	return (true);
 }

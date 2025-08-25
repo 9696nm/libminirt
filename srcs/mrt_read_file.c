@@ -91,6 +91,7 @@ int	mrt_read_file(t_scene *vars, char *path)
 	{mrt_int_parse_handle_pl, "pl"},
 	{mrt_int_parse_handle_sp, "sp"},
 	{mrt_int_parse_handle_cy, "cy"},
+	{mrt_int_parse_handle_default, "#"},
 	{mrt_int_parse_handle_default, NULL} /* feedback */};
 
 	if (has_extension(path, RT_FILE_EXTENSION) == false)
