@@ -15,15 +15,13 @@
 int	mrt_int_parse_handle_a(t_scene *vars, const char *str)
 {
 	t_lgt_amb	stk;
-	char 		*endptr;
 	t_lgt_amb	*new;
+	t_fp_maps	map[] = {
+	{mrt_int_parse_bright, &stk.base.bright}, {NULL, NULL}};
 
-	str += ft_strlen("A");
 	stk.base.type = LGT_AMBIENT;
-	stk.base.bright = mrt_int_parse_bright(str, &endptr);
-	if (endptr == NULL)
+	if (mrt_int_parse_str_split(str + ft_strlen("A"), map) == false)
 		return (false);
-
 	new = malloc(sizeof(t_lgt_amb));
 	if (new == NULL)
 		return (false);

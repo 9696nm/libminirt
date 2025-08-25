@@ -61,17 +61,25 @@ typedef struct s_prefix_handler
 	const char	*pfx;
 }	t_pfx_hdl;
 
+typedef struct s_func_ptr_maps
+{
+	int		(*fnc)(const char *, void *);
+	void	*ptr;
+}	t_fp_maps;
+
 /* mrt_int_parse_handler */
-int	mrt_int_parse_handle_a(t_scene *vars, const char *str);
-int	mrt_int_parse_handle_c(t_scene *vars, const char *str);
-int	mrt_int_parse_handle_l(t_scene *vars, const char *str);
-int	mrt_int_parse_handle_pl(t_scene *vars, const char *str);
-int	mrt_int_parse_handle_sp(t_scene *vars, const char *str);
-int	mrt_int_parse_handle_cy(t_scene *vars, const char *str);
-int	mrt_int_parse_handle_default(t_scene *vars, const char *str);
+int		mrt_int_parse_handle_a(t_scene *vars, const char *str);
+int		mrt_int_parse_handle_c(t_scene *vars, const char *str);
+int		mrt_int_parse_handle_l(t_scene *vars, const char *str);
+int		mrt_int_parse_handle_pl(t_scene *vars, const char *str);
+int		mrt_int_parse_handle_sp(t_scene *vars, const char *str);
+int		mrt_int_parse_handle_cy(t_scene *vars, const char *str);
+int		mrt_int_parse_handle_default(t_scene *vars, const char *str);
 
 /* mrt_int_parse_str */
-unsigned char	mrt_int_parse_bright(const char *str, char **endptr);
+int		mrt_int_parse_str_split(const char *src, const t_fp_maps *map);
+int		mrt_int_parse_bright(const char *str, void *ptr);
+
 
 /* !!!!! debug !!!!! */
 void	mrt_int_debug_print_cam(t_base_cam *ptr);

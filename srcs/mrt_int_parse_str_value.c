@@ -17,26 +17,36 @@ const char	*mrt_int_parse_uint(unsigned int *ptr, const char *str)
 	;
 }
 
-const char	*mrt_int_parse_float(float *ptr, const char *str)
-{
-	;
-}
+// float	*mrt_int_parse_float(const char *str, char **endptr)
+// {
+// 	char	*tmp;
+// 	float	fl;
 
-unsigned char	mrt_int_parse_bright(const char *str, char **endptr)
-{
-	char	*tmp;
-	float	bright;
+// 	if (endptr)
+// 		*endptr = NULL;
+// 	if (str == NULL)
+// 		return (0);
+// 	while (ft_isspace(*str))
+// 		str++;
+// 	fl = strtof(str, &tmp);
+// 	if (fl == NAN || fl < 0.0f || 1.0f < fl)
+// 		return (0);
+// 	if (endptr)
+// 		*endptr = tmp;
+// 	return ((unsigned char)(fl * 255.0f + 0.5f));
+// }
 
-	if (endptr)
-		*endptr = NULL;
-	if (str == NULL)
-		return (0);
-	while (ft_isspace(*str))
-		str++;
-	bright = strtof(str, &tmp);
-	if (bright == NAN || bright < 0.0f || 1.0f < bright)
-		return (0);
-	if (endptr)
-		*endptr = tmp;
-	return ((unsigned char)(bright * 255.0f + 0.5f));
+int	mrt_int_parse_bright(const char *str, void *ptr)
+{
+	unsigned char	*bright;
+	float			fl;
+
+	if (str == NULL || ft_isdigit(*str) == 0)
+		return (false);
+	bright = ptr;
+	fl = atof(str);
+	if (fl == NAN || fl < 0.0f || 1.0f < fl)
+		return (false);
+	*bright = (unsigned char)(fl * 255.0f + 0.5f);
+	return (true);
 }

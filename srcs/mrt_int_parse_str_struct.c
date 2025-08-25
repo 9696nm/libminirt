@@ -12,31 +12,28 @@
 
 #include "minirt_int.h"
 
-unsigned int	mrt_int_parse_color(const char *str, char **endptr)
-{
-	char			*tmp;
-	long int		value;
-	unsigned int	color;
+// int	mrt_int_parse_color(const char *str, void *ptr)
+// {
+// 	int				comma;
+// 	int				value;
+// 	unsigned int	color;
 
-	if (endptr)
-		*endptr = NULL;
-	if (str == NULL)
-		return (0);
-	while (ft_isspace(*str))
-		str++;
-	color = 0;
-	while (*str)
-	{
-		value = strtol(str, &tmp, 10);
-		if (value < 0l || 255l < value)
-			return (0);
-		str = tmp;
-		color = (color << 8) | (unsigned char)value;
-	}
-	if (endptr)
-		*endptr = tmp;
-	return (color);
-}
+// 	if (str == NULL)
+// 		return (false);
+// 	comma = 2;
+// 	color = 0;
+// 	while (*str)
+// 	{
+// 		value = atoi(str);
+// 		if (value < 0l || 255l < value)
+// 			return (false);
+// 		color = (color << 8) | (unsigned char)value;
+// 		if (comma-- == 0)
+			
+// 		str = tmp;
+// 	}
+// 	return (true);
+// }
 
 const char	*mrt_int_parse_coord(t_coord3 *ptr, const char *str)
 {
