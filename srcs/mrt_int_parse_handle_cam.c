@@ -17,9 +17,9 @@ int	mrt_int_parse_handle_c(t_scene *vars, const char *str)
 	t_cam_persp		stk;
 	t_cam_persp		*new;
 	const t_fp_maps	map[] = {
-	{mrt_int_parse_coord, &stk.base.pos},
-	{mrt_int_parse_vecter3, &stk.base.view},
-	{mrt_int_parse_fov, &stk.fov},
+	{mrt_int_parse_str_coord, &stk.base.pos},
+	{mrt_int_parse_str_vecter3, &stk.base.view},
+	{mrt_int_parse_str_fov, &stk.fov},
 	{NULL, NULL}};
 
 	stk.base.type = CAM_PERSPECTIVE;

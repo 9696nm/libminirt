@@ -79,12 +79,12 @@ int		mrt_int_parse_handle_default(t_scene *vars, const char *str);
 
 /* mrt_int_parse_str */
 int		mrt_int_parse_str_split(const char *src, const t_fp_maps *map);
-int		mrt_int_parse_bright(const char *str, void *ptr);
-int		mrt_int_parse_ufloat(const char *str, void *ptr);
-int		mrt_int_parse_fov(const char *str, void *ptr);
-int		mrt_int_parse_color(const char *str, void *ptr);
-int		mrt_int_parse_coord(const char *str, void *ptr);
-int		mrt_int_parse_vecter3(const char *str, void *ptr);
+int		mrt_int_parse_str_bright(const char *str, void *ptr);
+int		mrt_int_parse_str_ufloat(const char *str, void *ptr);
+int		mrt_int_parse_str_fov(const char *str, void *ptr);
+int		mrt_int_parse_str_color(const char *str, void *ptr);
+int		mrt_int_parse_str_coord(const char *str, void *ptr);
+int		mrt_int_parse_str_vecter3(const char *str, void *ptr);
 
 /* !!!!! debug !!!!! */
 void	mrt_int_debug_print_cam(t_base_cam *ptr);

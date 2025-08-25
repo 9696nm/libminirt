@@ -12,7 +12,7 @@
 
 #include "minirt_int.h"
 
-int	mrt_int_parse_bright(const char *str, void *ptr)
+int	mrt_int_parse_str_bright(const char *str, void *ptr)
 {
 	float	fl;
 
@@ -25,7 +25,7 @@ int	mrt_int_parse_bright(const char *str, void *ptr)
 	return (true);
 }
 
-int	mrt_int_parse_ufloat(const char *str, void *ptr)
+int	mrt_int_parse_str_ufloat(const char *str, void *ptr)
 {
 	float	fl;
 
@@ -38,7 +38,7 @@ int	mrt_int_parse_ufloat(const char *str, void *ptr)
 	return (true);
 }
 
-int	mrt_int_parse_fov(const char *str, void *ptr)
+int	mrt_int_parse_str_fov(const char *str, void *ptr)
 {
 	float	fov;
 

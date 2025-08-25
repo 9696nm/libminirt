@@ -17,8 +17,8 @@ int	mrt_int_parse_handle_a(t_scene *vars, const char *str)
 	t_lgt_amb		stk;
 	t_lgt_amb		*new;
 	const t_fp_maps	map[] = {
-	{mrt_int_parse_bright, &stk.base.bright},
-	{mrt_int_parse_color, &stk.base.col},
+	{mrt_int_parse_str_bright, &stk.base.bright},
+	{mrt_int_parse_str_color, &stk.base.col},
 	{NULL, NULL}};
 
 	stk.base.type = LGT_AMBIENT;
@@ -38,9 +38,9 @@ int	mrt_int_parse_handle_l(t_scene *vars, const char *str)
 	t_lgt_pt		stk;
 	t_lgt_pt		*new;
 	const t_fp_maps	map[] = {
-	{mrt_int_parse_coord, &stk.pos},
-	{mrt_int_parse_bright, &stk.base.bright},
-	{mrt_int_parse_color, &stk.base.col},
+	{mrt_int_parse_str_coord, &stk.pos},
+	{mrt_int_parse_str_bright, &stk.base.bright},
+	{mrt_int_parse_str_color, &stk.base.col},
 	{NULL, NULL}};
 
 	stk.base.type = LGT_POINT;

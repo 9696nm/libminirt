@@ -17,9 +17,9 @@ int	mrt_int_parse_handle_pl(t_scene *vars, const char *str)
 	t_obj_pln		stk;
 	t_obj_pln		*new;
 	const t_fp_maps	map[] = {
-	{mrt_int_parse_coord, &stk.base.pos},
-	{mrt_int_parse_vecter3, &stk.normal},
-	{mrt_int_parse_color, &stk.base.col},
+	{mrt_int_parse_str_coord, &stk.base.pos},
+	{mrt_int_parse_str_vecter3, &stk.normal},
+	{mrt_int_parse_str_color, &stk.base.col},
 	{NULL, NULL}};
 
 	stk.base.type = OBJ_PLANE;
@@ -39,9 +39,9 @@ int	mrt_int_parse_handle_sp(t_scene *vars, const char *str)
 	t_obj_sph		stk;
 	t_obj_sph		*new;
 	const t_fp_maps	map[] = {
-	{mrt_int_parse_coord, &stk.base.pos},
-	{mrt_int_parse_ufloat, &stk.d},
-	{mrt_int_parse_color, &stk.base.col},
+	{mrt_int_parse_str_coord, &stk.base.pos},
+	{mrt_int_parse_str_ufloat, &stk.d},
+	{mrt_int_parse_str_color, &stk.base.col},
 	{NULL, NULL}};
 
 	stk.base.type = OBJ_SPHERE;
@@ -61,11 +61,11 @@ int	mrt_int_parse_handle_cy(t_scene *vars, const char *str)
 	t_obj_cyl		stk;
 	t_obj_cyl		*new;
 	const t_fp_maps	map[] = {
-	{mrt_int_parse_coord, &stk.base.pos},
-	{mrt_int_parse_vecter3, &stk.axis},
-	{mrt_int_parse_ufloat, &stk.d},
-	{mrt_int_parse_ufloat, &stk.h},
-	{mrt_int_parse_color, &stk.base.col},
+	{mrt_int_parse_str_coord, &stk.base.pos},
+	{mrt_int_parse_str_vecter3, &stk.axis},
+	{mrt_int_parse_str_ufloat, &stk.d},
+	{mrt_int_parse_str_ufloat, &stk.h},
+	{mrt_int_parse_str_color, &stk.base.col},
 	{NULL, NULL}};
 
 	stk.base.type = OBJ_CYLINDER;

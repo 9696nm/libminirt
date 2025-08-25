@@ -25,7 +25,7 @@ static size_t	next_comma(const char *str)
 	return (len);
 }
 
-int	mrt_int_parse_color(const char *str, void *ptr)
+int	mrt_int_parse_str_color(const char *str, void *ptr)
 {
 	int				loop;
 	int				i;
@@ -48,7 +48,7 @@ int	mrt_int_parse_color(const char *str, void *ptr)
 	return (true);
 }
 
-int	mrt_int_parse_coord(const char *str, void *ptr)
+int	mrt_int_parse_str_coord(const char *str, void *ptr)
 {
 	t_coord3	coord;
 
@@ -69,7 +69,7 @@ int	mrt_int_parse_coord(const char *str, void *ptr)
 	return (true);
 }
 
-int	mrt_int_parse_vecter3(const char *str, void *ptr)
+int	mrt_int_parse_str_vecter3(const char *str, void *ptr)
 {
 	t_vec3	vec;
 
