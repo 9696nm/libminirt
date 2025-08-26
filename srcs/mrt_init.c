@@ -23,5 +23,6 @@ t_scene	*mrt_init(void)
 	vars->num_cam = 0;
 	vars->num_lgt = 0;
 	vars->num_obj = 0;
+	vars->mlx = mlx_init();
 	return (vars);
 }

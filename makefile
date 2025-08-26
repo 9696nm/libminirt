@@ -43,6 +43,7 @@ SRCS			=	mrt_destroy.c \
 					mrt_int_parse_str_split.c \
 					mrt_int_parse_str_struct.c \
 					mrt_int_parse_str_value.c \
+					mrt_loop.c \
 					mrt_read_file.c \
 					mrt_int_debug.c #debug!!!! \
 

@@ -44,5 +44,9 @@ void	mrt_destroty(t_scene *vars)
 	// 	free(vars->lights[vars->num_lgt]);
 	// while (vars->num_obj--)
 	// 	free(vars->objects[vars->num_obj]);
+	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
+
 	free(vars);
 }

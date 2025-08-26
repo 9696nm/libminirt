@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   mrt_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 18:10:52 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/08 16:46:55 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/07/08 18:55:19 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/07/08 18:55:20 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "minirt_int.h"
 
-void	mrt_destroty(void *vars);
-
-void	*mrt_init(void);
-void	mrt_loop(void *vars);
-int		mrt_read_file(void *vars, char *path);
-
-#endif /* MINIRT_H */ 
+void	mrt_loop(t_scene *vars)
+{
+	mlx_loop(vars->mlx);
+}

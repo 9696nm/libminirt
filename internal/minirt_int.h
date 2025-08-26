@@ -21,6 +21,8 @@
 # include <stdlib.h>
 # include <math.h>
 
+# include "mlx.h"
+
 # include "ft/ctype.h"
 # include "ft/stdio.h"
 # include "ft/stdlib.h"
@@ -54,6 +56,8 @@ typedef struct s_scene
 	unsigned int	num_obj;
 	u_int32_t		pfx_used_bits;
 
+	void			*mlx;
+	void			*win;
 }	t_scene;
 
 typedef struct s_prefix_handler
