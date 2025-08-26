@@ -6,7 +6,7 @@
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 18:55:19 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/08 18:55:20 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/08/26 14:51:57 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 t_scene	*mrt_init(void)
 {
-	t_scene	*vars;
+	t_scene	*scene;
 
-	vars = malloc(sizeof(t_scene));
-	if (vars == NULL)
+	scene = malloc(sizeof(t_scene));
+	if (scene == NULL)
 		return (NULL);
-	vars->pfx_used_bits = 0b0;
-	vars->num_cam = 0;
-	vars->num_lgt = 0;
-	vars->num_obj = 0;
-	vars->mlx = mlx_init();
-	return (vars);
+	scene->pfx_used_bits = 0b0;
+	scene->num_cam = 0;
+	scene->num_lgt = 0;
+	scene->num_obj = 0;
+	return (scene);
 }

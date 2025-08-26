@@ -6,13 +6,13 @@
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:02:43 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/08/18 01:56:26 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/08/26 14:51:57 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_int.h"
 
-int	mrt_int_parse_handle_c(t_scene *vars, const char *str)
+int	mrt_int_parse_handle_c(t_scene *scene, const char *str)
 {
 	t_cam_persp		stk;
 	t_cam_persp		*new;
@@ -29,12 +29,12 @@ int	mrt_int_parse_handle_c(t_scene *vars, const char *str)
 	if (new == NULL)
 		return (false);
 	ft_memcpy(new, &stk, sizeof(t_cam_persp));
-	vars->cameras[vars->num_cam] = (t_base_cam *)new;
-	vars->num_cam++;
+	scene->cameras[scene->num_cam] = (t_base_cam *)new;
+	scene->num_cam++;
 	return (true);
 }
 
-int	mrt_int_parse_handle_default(t_scene *vars __attribute__((unused)),
+int	mrt_int_parse_handle_default(t_scene *scene __attribute__((unused)),
 	const char *str __attribute__((unused)))
 {
 	return (true);

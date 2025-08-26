@@ -6,13 +6,13 @@
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:02:43 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/08/21 17:09:52 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/08/26 14:51:57 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_int.h"
 
-int	mrt_int_parse_handle_a(t_scene *vars, const char *str)
+int	mrt_int_parse_handle_a(t_scene *scene, const char *str)
 {
 	t_lgt_amb		stk;
 	t_lgt_amb		*new;
@@ -28,12 +28,12 @@ int	mrt_int_parse_handle_a(t_scene *vars, const char *str)
 	if (new == NULL)
 		return (false);
 	ft_memcpy(new, &stk, sizeof(t_lgt_amb));
-	vars->lights[vars->num_lgt] = (t_base_lgt *)new;
-	vars->num_lgt++;
+	scene->lights[scene->num_lgt] = (t_base_lgt *)new;
+	scene->num_lgt++;
 	return (true);
 }
 
-int	mrt_int_parse_handle_l(t_scene *vars, const char *str)
+int	mrt_int_parse_handle_l(t_scene *scene, const char *str)
 {
 	t_lgt_pt		stk;
 	t_lgt_pt		*new;
@@ -50,7 +50,7 @@ int	mrt_int_parse_handle_l(t_scene *vars, const char *str)
 	if (new == NULL)
 		return (false);
 	ft_memcpy(new, &stk, sizeof(t_lgt_pt));
-	vars->lights[vars->num_lgt] = (t_base_lgt *)new;
-	vars->num_lgt++;
+	scene->lights[scene->num_lgt] = (t_base_lgt *)new;
+	scene->num_lgt++;
 	return (true);
 }

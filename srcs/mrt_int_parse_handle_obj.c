@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt_int_obj_init_handler.c                         :+:      :+:    :+:   */
+/*   mrt_int_parse_handle_obj.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:02:36 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/08/11 12:28:16 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/08/26 14:51:57 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_int.h"
 
-int	mrt_int_parse_handle_pl(t_scene *vars, const char *str)
+int	mrt_int_parse_handle_pl(t_scene *scene, const char *str)
 {
 	t_obj_pln		stk;
 	t_obj_pln		*new;
@@ -29,12 +29,12 @@ int	mrt_int_parse_handle_pl(t_scene *vars, const char *str)
 	if (new == NULL)
 		return (false);
 	ft_memcpy(new, &stk, sizeof(t_obj_pln));
-	vars->objects[vars->num_obj] = (t_base_obj *)new;
-	vars->num_obj++;
+	scene->objects[scene->num_obj] = (t_base_obj *)new;
+	scene->num_obj++;
 	return (true);
 }
 
-int	mrt_int_parse_handle_sp(t_scene *vars, const char *str)
+int	mrt_int_parse_handle_sp(t_scene *scene, const char *str)
 {
 	t_obj_sph		stk;
 	t_obj_sph		*new;
@@ -51,12 +51,12 @@ int	mrt_int_parse_handle_sp(t_scene *vars, const char *str)
 	if (new == NULL)
 		return (false);
 	ft_memcpy(new, &stk, sizeof(t_obj_sph));
-	vars->objects[vars->num_obj] = (t_base_obj *)new;
-	vars->num_obj++;
+	scene->objects[scene->num_obj] = (t_base_obj *)new;
+	scene->num_obj++;
 	return (true);
 }
 
-int	mrt_int_parse_handle_cy(t_scene *vars, const char *str)
+int	mrt_int_parse_handle_cy(t_scene *scene, const char *str)
 {
 	t_obj_cyl		stk;
 	t_obj_cyl		*new;
@@ -75,7 +75,7 @@ int	mrt_int_parse_handle_cy(t_scene *vars, const char *str)
 	if (new == NULL)
 		return (false);
 	ft_memcpy(new, &stk, sizeof(t_obj_cyl));
-	vars->objects[vars->num_obj] = (t_base_obj *)new;
-	vars->num_obj++;
+	scene->objects[scene->num_obj] = (t_base_obj *)new;
+	scene->num_obj++;
 	return (true);
 }

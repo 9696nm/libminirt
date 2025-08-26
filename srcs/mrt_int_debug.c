@@ -7,6 +7,8 @@ static const char	*obj_lst[] = {"SPHERE", "PLANE", "CYLINDER", "UNKNOWN"};
 
 void	mrt_int_debug_print_cam(t_base_cam *ptr)
 {
+	t_cam_persp	*persp;
+
 	if (ptr == NULL)
 		return ;
 
@@ -16,8 +18,6 @@ void	mrt_int_debug_print_cam(t_base_cam *ptr)
 	switch (ptr->type)
 	{
 		case (CAM_PERSPECTIVE):
-			t_cam_persp	*persp;
-
 			persp = (t_cam_persp *)ptr;
 			printf("fov    -> %f\n", persp->fov);
 			break ;
@@ -29,6 +29,8 @@ void	mrt_int_debug_print_cam(t_base_cam *ptr)
 
 void	mrt_int_debug_print_lgt(t_base_lgt *ptr)
 {
+	t_lgt_pt	*pt;
+
 	if (ptr == NULL)
 		return ;
 
@@ -42,8 +44,6 @@ void	mrt_int_debug_print_lgt(t_base_lgt *ptr)
 		case (LGT_AMBIENT):
 			break ;
 		case (LGT_POINT):
-			t_lgt_pt	*pt;
-
 			pt = (t_lgt_pt *)ptr;
 			printf("normal -> x:%f y:%f z:%f\n", pt->pos.x, pt->pos.y, pt->pos.z);
 			break ;
@@ -55,6 +55,10 @@ void	mrt_int_debug_print_lgt(t_base_lgt *ptr)
 
 void	mrt_int_debug_print_obj(t_base_obj *ptr)
 {
+	t_obj_sph	*sph;
+	t_obj_pln	*pln;
+	t_obj_cyl	*cyl;
+
 	if (ptr == NULL)
 		return ;
 
@@ -66,20 +70,14 @@ void	mrt_int_debug_print_obj(t_base_obj *ptr)
 	switch (ptr->type)
 	{
 		case (OBJ_SPHERE):
-			t_obj_sph	*sph;
-
 			sph = (t_obj_sph *)ptr;
 			printf("diam   -> %f\n", sph->d);
 			break ;
 		case (OBJ_PLANE):
-			t_obj_pln	*pln;
-
 			pln = (t_obj_pln *)ptr;
 			printf("normal -> x:%f y:%f z:%f\n", pln->normal.x, pln->normal.y, pln->normal.z);
 			break ;
 		case (OBJ_CYLINDER):
-			t_obj_cyl	*cyl;
-
 			cyl = (t_obj_cyl *)ptr;
 			printf("axis   -> x:%f y:%f z:%f\n", cyl->axis.x, cyl->axis.y, cyl->axis.z);
 			break ;

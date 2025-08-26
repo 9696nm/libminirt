@@ -6,7 +6,7 @@
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 18:55:25 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/08 18:55:26 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/08/26 14:51:57 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ typedef struct s_scene
 	t_base_obj		*objects[MAX_OBJECTS];
 	unsigned int	num_obj;
 	u_int32_t		pfx_used_bits;
-
-	void			*mlx;
-	void			*win;
 }	t_scene;
 
 typedef struct s_prefix_handler
@@ -73,13 +70,13 @@ typedef struct s_func_ptr_maps
 }	t_fp_maps;
 
 /* mrt_int_parse_handler */
-int		mrt_int_parse_handle_a(t_scene *vars, const char *str);
-int		mrt_int_parse_handle_c(t_scene *vars, const char *str);
-int		mrt_int_parse_handle_l(t_scene *vars, const char *str);
-int		mrt_int_parse_handle_pl(t_scene *vars, const char *str);
-int		mrt_int_parse_handle_sp(t_scene *vars, const char *str);
-int		mrt_int_parse_handle_cy(t_scene *vars, const char *str);
-int		mrt_int_parse_handle_default(t_scene *vars, const char *str);
+int		mrt_int_parse_handle_a(t_scene *scene, const char *str);
+int		mrt_int_parse_handle_c(t_scene *scene, const char *str);
+int		mrt_int_parse_handle_l(t_scene *scene, const char *str);
+int		mrt_int_parse_handle_pl(t_scene *scene, const char *str);
+int		mrt_int_parse_handle_sp(t_scene *scene, const char *str);
+int		mrt_int_parse_handle_cy(t_scene *scene, const char *str);
+int		mrt_int_parse_handle_default(t_scene *scene, const char *str);
 
 /* mrt_int_parse_str */
 int		mrt_int_parse_str_split(const char *src, const t_fp_maps *map);

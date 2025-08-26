@@ -6,7 +6,7 @@
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 18:55:17 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/08 18:55:18 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/08/26 15:09:59 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	has_extension(const char *path, const char *ext)
 	return (ft_strcmp(dot, ext) == 0);
 }
 
-static int	mrt_int_extract_valid_prefix(const char *buf, t_scene *vars,
+static int	mrt_int_extract_valid_prefix(const char *buf, t_scene *scene,
 	const t_pfx_hdl *handlers)
 {
 	unsigned int	match_idx;
@@ -40,9 +40,9 @@ static int	mrt_int_extract_valid_prefix(const char *buf, t_scene *vars,
 	{
 		if (ft_strncmp(buf, handlers[match_idx].pfx, 1) == 0)
 		{
-			if (ft_isupper(*buf) && vars->pfx_used_bits & (1U << match_idx))
+			if (ft_isupper(*buf) && scene->pfx_used_bits & (1U << match_idx))
 				return (ret_errmsg(-1, ERR_MULTIPLE_UNIQUE_PREFIXES));
-			vars->pfx_used_bits |= (1U << match_idx);
+			scene->pfx_used_bits |= (1U << match_idx);
 			return ((int)match_idx);
 		}
 		match_idx++;
@@ -52,7 +52,7 @@ static int	mrt_int_extract_valid_prefix(const char *buf, t_scene *vars,
 	return (ret_errmsg(-1, ERR_NO_MATCHING_PREFIX));
 }
 
-int	mrt_int_set_array(t_scene *vars, int fd, const t_pfx_hdl *handlers)
+int	mrt_int_set_array(t_scene *scene, int fd, const t_pfx_hdl *handlers)
 {
 	int		pfx_type;
 	int		line_cnt;
@@ -66,11 +66,11 @@ int	mrt_int_set_array(t_scene *vars, int fd, const t_pfx_hdl *handlers)
 			return (line_cnt);
 		return (0);
 	}
-	pfx_type = mrt_int_extract_valid_prefix(buf, vars, handlers);
+	pfx_type = mrt_int_extract_valid_prefix(buf, scene, handlers);
 	if (-1 < pfx_type)
 	{
-		if (handlers[(unsigned int)pfx_type].hdl(vars, buf))
-			line_cnt = mrt_int_set_array(vars, fd, handlers);
+		if (handlers[(unsigned int)pfx_type].hdl(scene, buf))
+			line_cnt = mrt_int_set_array(scene, fd, handlers);
 		else if (errno == 0)
 			dprintf(STDERR_FILENO, ERR_INVALID_VALUE, buf);
 		if (-1 < line_cnt)
@@ -80,7 +80,7 @@ int	mrt_int_set_array(t_scene *vars, int fd, const t_pfx_hdl *handlers)
 	return (line_cnt);
 }
 
-int	mrt_read_file(t_scene *vars, char *path)
+int	mrt_read_file(const char *path, t_scene *scene)
 {
 	int				fd;
 	int				line_cnt;
@@ -99,7 +99,7 @@ int	mrt_read_file(t_scene *vars, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (fd);
-	line_cnt = mrt_int_set_array(vars, fd, handlers);
+	line_cnt = mrt_int_set_array(scene, fd, handlers);
 	close(fd);
 	return (line_cnt);
 }
