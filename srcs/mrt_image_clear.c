@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt_loop.c                                         :+:      :+:    :+:   */
+/*   mrt_image_clear.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,14 @@
 
 #include "minirt_int.h"
 
-#include "time.h"
-int	mrt_loop(void *scene)
+int	mrt_image_clear(void *img, int width, int height)
 {
-	// mlx_loop(scene->mlx);
-	usleep(1);
+	t_img_info	info;
+
+	info.addr = mlx_get_data_addr(img, &info.bits_per_pixel, &info.size_line,
+			&info.endian);
+	info.width = width;
+	info.height = height;
+	ft_bzero(info.addr, width * height * (info.bits_per_pixel / 8));
 	return (0);
 }

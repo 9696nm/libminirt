@@ -21,8 +21,6 @@
 # include <stdlib.h>
 # include <math.h>
 
-# include "mlx.h"
-
 # include "ft/ctype.h"
 # include "ft/stdio.h"
 # include "ft/stdlib.h"
@@ -30,6 +28,7 @@
 # include "get_next_line.h"
 # include "libarith.h"
 
+# include "mlx_types.h"
 # include "scene_types.h"
 
 # define MAX_CAMERAS 4
@@ -37,7 +36,7 @@
 # define MAX_OBJECTS 128
 # define RT_FILE_EXTENSION ".rt"
 
-/* error messege */
+/*  error messege  */
 # define ERR_INVALID_EXTENSION "Error: scene file must have a '.rt' \
 extension.\n"
 # define ERR_NO_MATCHING_PREFIX "Error: no matching prefix found \
@@ -57,6 +56,7 @@ typedef struct s_scene
 	u_int32_t		pfx_used_bits;
 }	t_scene;
 
+/*  parse_module  */
 typedef struct s_prefix_handler
 {
 	int			(*hdl)(t_scene *, const char *);
@@ -86,6 +86,7 @@ int		mrt_int_parse_str_fov(const char *str, void *ptr);
 int		mrt_int_parse_str_color(const char *str, void *ptr);
 int		mrt_int_parse_str_coord(const char *str, void *ptr);
 int		mrt_int_parse_str_vecter3(const char *str, void *ptr);
+
 
 /* !!!!! debug !!!!! */
 void	mrt_int_debug_print_cam(t_base_cam *ptr);

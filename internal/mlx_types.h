@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   mlx_types.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 18:10:52 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/08/26 15:15:51 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/08/07 14:12:40 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/08/07 14:13:14 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MLX_TYPES_H
+# define MLX_TYPES_H
 
-void	mrt_destroty(void *scene);
-int		mrt_image_clear(void *img, int width, int height);
-void	*mrt_init(void);
-int		mrt_rander_set(void *scene, void *img, int width, int height);
-int		mrt_read_file(void *scene, const char *path);
+# include "mlx.h"
 
-#endif /* MINIRT_H */ 
+typedef struct s_image_info
+{
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+
+	int		width;
+	int		height;
+}	t_img_info;
+
+#endif /* MLX_TYPES_H */

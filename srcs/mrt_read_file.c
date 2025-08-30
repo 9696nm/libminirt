@@ -80,7 +80,7 @@ int	mrt_int_set_array(t_scene *scene, int fd, const t_pfx_hdl *handlers)
 	return (line_cnt);
 }
 
-int	mrt_read_file(const char *path, t_scene *scene)
+int	mrt_read_file(t_scene *scene, const char *path)
 {
 	int				fd;
 	int				line_cnt;
