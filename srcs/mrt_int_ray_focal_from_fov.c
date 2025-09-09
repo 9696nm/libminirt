@@ -19,7 +19,7 @@ float	mrt_int_ray_focal_from_fov(int fov)
 	if (fov <= 0)
 		return (FOCAL_LENGTH_MAX);
 	if (180 <= fov)
-		return (0.0f);
+		return (FLT_EPSILON);
 	tan_val = tanf((float)fov * M_PI / 360.0f);
 	return (1.0f / tan_val);
 }

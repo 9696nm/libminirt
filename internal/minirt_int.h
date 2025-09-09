@@ -29,8 +29,7 @@
 # include "libarith.h"
 
 # include "types_scene.h"
-# include "types_transform.h"
-
+# include "types_ray.h"
 
 /* number of scene */
 # define MAX_CAMERAS 4

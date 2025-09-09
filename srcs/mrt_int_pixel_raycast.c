@@ -13,39 +13,46 @@
 #include "minirt_int.h"
 #include "utils_render.h"
 
-int	mrt_int_pixel_raycast(t_vec3 *raycast, t_scene *scene, int x, int y)
+int	mrt_int_pixel_raycast(t_ray *ray, t_scene *scene, int x, int y)
 {
 	t_ndc			ndc;
-	t_base_cam		*cam;
+	unsigned int	cam_id;
 	const t_trance	trances[] = {
 		mrt_int_pixel_raycast_perspective};
 
-	cam = mrt_int_get_cam_type(scene);
-	if (cam == NULL)
+	cam_id = 0;
+	while (cam_id < scene->num_cam)
+	{
+		if (scene->cameras[cam_id]->type == scene->cam_type)
+			break ;
+		cam_id++;
+	}
+	if (cam_id == scene->num_cam)
 		return (false);
 	ndc.x = scene->ndc_norm.x * x - 1.0f;
 	ndc.y = 1.0f - scene->ndc_norm.y * y;
-	*raycast = trances[scene->cam_type]
-		(cam, ndc, scene->aspect_ratio);
+	ray->cam = scene->cameras[cam_id];
+	ray->raycast = trances[scene->cam_type]
+		(ray->cam, ndc, scene->aspect_ratio);
 	return (true);
 }
 
 t_vec3	mrt_int_pixel_raycast_perspective(t_base_cam *cam,
 					t_ndc ndc, float aspect)
 {
-	t_vec3		ray;
+	t_vec3		ray_ndc;
 	t_quat		ray_world;
 	t_cam_persp	*persp;
 
 	persp = (t_cam_persp *)cam;
-	ray.x = ndc.x * aspect;
-	ray.y = ndc.y;
-	ray.z = persp->focal_length;
-	if (ray.z < FOCAL_LENGTH_MAX)
-		ray = vec3_normalize(ray);
+	ray_ndc.x = ndc.x * aspect;
+	ray_ndc.y = ndc.y;
+	ray_ndc.z = persp->focal_length;
+	if (ray_ndc.z < FOCAL_LENGTH_MAX)
+		ray_ndc = vec3_normalize(ray_ndc);
 	else
-		ray = (t_vec3){0.0f, 0.0f, 1.0f};
-	ray_world = quat_rotate((t_quat){ray.x, ray.y, ray.z, 0}, persp->cam_rot);
-	printf("wor-> x:%f y:%f z:%f w:%f\n", ray_world.x, ray_world.y, ray_world.z, ray_world.w);
+		ray_ndc = (t_vec3){0.0f, 0.0f, 1.0f};
+	ray_world = quat_rotate(
+			(t_quat){ray_ndc.x, ray_ndc.y, ray_ndc.z, 0}, persp->cam_rot);
 	return ((t_vec3){ray_world.x, ray_world.y, ray_world.z});
 }

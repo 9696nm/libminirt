@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt_select_cam_type.c                              :+:      :+:    :+:   */
+/*   types_ray.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/05 17:32:56 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/09/05 17:32:57 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/08/07 14:12:40 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/08/07 14:13:14 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_int.h"
+#ifndef TYPES_RAY_H
+# define TYPES_RAY_H
 
-t_base_cam	*mrt_int_get_cam_type(t_scene *scene)
+# include <stdlib.h>
+
+# include "libarith.h"
+
+typedef struct s_base_object	t_base_obj;
+
+typedef struct s_ndc
 {
-	unsigned int	cam_id;
+	float	x;
+	float	y;
+}	t_ndc;
 
-	cam_id = 0;
-	while (cam_id < scene->num_cam)
-	{
-		if (scene->cameras[cam_id]->type == scene->cam_type)
-			return (scene->cameras[cam_id]);
-		cam_id++;
-	}
-	return (NULL);
-}
+typedef struct s_ray
+{
+	t_base_cam	*cam;
+	t_base_obj	*colision;
+	float		distance;
+	t_vec3		raycast;
+	t_vec3		reflex;
+}	t_ray;
+
+#endif /* TYPES_RAY_H */

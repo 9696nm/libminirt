@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_render.h                                      :+:      :+:    :+:   */
+/*   utils_render.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@
 
 # include "libarith.h"
 # include "types_scene.h"
-# include "types_transform.h"
+# include "types_ray.h"
 
 # define FOCAL_LENGTH_MAX 1e6f
 
@@ -27,12 +27,11 @@ typedef struct s_scene	t_scene;
 
 typedef t_vec3			(*t_trance)(t_base_cam *, t_ndc, float);
 
-
 /* mrt_int_pixel_color */
 unsigned int	mrt_int_pixel_color(t_scene *scene, int x, int y);
 
 /* mrt_int_pixel_raycast */
-int				mrt_int_pixel_raycast(t_vec3 *raycast,
+int				mrt_int_pixel_raycast(t_ray *raycast,
 					t_scene *scene, int x, int y);
 t_vec3			mrt_int_pixel_raycast_perspective(t_base_cam *cam,
 					t_ndc ndc, float aspect);
@@ -40,7 +39,10 @@ t_vec3			mrt_int_pixel_raycast_perspective(t_base_cam *cam,
 /* mrt_int_ray_focal_from_fov */
 float			mrt_int_ray_focal_from_fov(int fov);
 
-/* mrt_int_get_cam_type */
-t_base_cam		*mrt_int_get_cam_type(t_scene *scene);
+/* mrt_int_intersect_search */
+int				mrt_int_intersect_search(t_ray *ray, t_scene *scene);
+float			mrt_int_intersect_sp(const t_ray *ray, void *obj);
+float			mrt_int_intersect_pl(const t_ray *ray, void *obj);
+float			mrt_int_intersect_cy(const t_ray *ray, void *obj);
 
 #endif /* UTILS_RENDER_H */

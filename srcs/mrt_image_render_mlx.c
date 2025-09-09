@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <time.h>	// debug
-
 #include "minirt_int.h"
 #include "utils_mlx.h"
 #include "utils_render.h"
@@ -37,7 +35,7 @@ int	mrt_image_render_mlx(t_scene *scene, void *img, int width, int height)
 			&info.endian);
 	scene->width = width;	// need?
 	scene->height = height;	//
-	scene->aspect_ratio = width / height;
+	scene->aspect_ratio = (float)width / height;
 	scene->ndc_norm.x = 2.0f / width;
 	scene->ndc_norm.y = 2.0f / height;
 	y = height;

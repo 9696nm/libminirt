@@ -15,10 +15,11 @@
 
 unsigned int	mrt_int_pixel_color(t_scene *scene, int x, int y)
 {
-	t_vec3	raycast;
+	t_ray	ray;
 
-	if (mrt_int_pixel_raycast(&raycast, scene, x, y) == false)
+	if (mrt_int_pixel_raycast(&ray, scene, x, y) == false)
 		return (0u);
-	
-	return (0x87cefa);
+	if (mrt_int_intersect_search(&ray, scene) == false)
+		return (0u);
+	return (ray.colision->col);
 }

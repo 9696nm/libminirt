@@ -21,6 +21,8 @@ void	mrt_int_debug_print_cam(t_base_cam *ptr)
 			persp = (t_cam_persp *)ptr;
 			printf("fov    -> %i\n", persp->fov);
 			printf("fov_tan-> %f\n", persp->focal_length);
+			printf("cam_rot-> x:%f y:%f z:%f w:%f\n",
+				persp->cam_rot.x, persp->cam_rot.y, persp->cam_rot.z, persp->cam_rot.w);
 			break ;
 		default :
 			;
@@ -73,6 +75,7 @@ void	mrt_int_debug_print_obj(t_base_obj *ptr)
 		case (OBJ_SPHERE):
 			sph = (t_obj_sph *)ptr;
 			printf("diam   -> %f\n", sph->d);
+			printf("radius -> %f\n", sph->r);
 			break ;
 		case (OBJ_PLANE):
 			pln = (t_obj_pln *)ptr;

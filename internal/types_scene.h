@@ -17,6 +17,8 @@
 
 # include "libarith.h"
 
+typedef struct s_ray	t_ray;
+
 typedef enum e_type_camera
 {
 	CAM_PERSPECTIVE,
@@ -58,7 +60,7 @@ typedef enum e_type_object
 
 typedef struct s_base_object
 {
-	void			(*intersect)(void *self);
+	float			(*intersect)(const t_ray *ray, void *self);
 
 	t_type_obj		type;
 	t_coord3		pos;
@@ -88,6 +90,7 @@ typedef struct s_object_sphere
 {
 	t_base_obj	base;
 	float		d;
+	float		r;
 }	t_obj_sph;
 
 typedef struct s_object_plane
