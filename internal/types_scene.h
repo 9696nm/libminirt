@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_types.h                                      :+:      :+:    :+:   */
+/*   types_scene.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_TYPES_H
-# define SCENE_TYPES_H
+#ifndef TYPES_SCENE_H
+# define TYPES_SCENE_H
 
 # include <stdlib.h>
 
@@ -25,9 +25,6 @@ typedef enum e_type_camera
 
 typedef struct s_base_camera
 {
-	void		(*intersect)(void *self);
-	void		(*destroy)(void *self);
-
 	t_type_cam	type;
 	t_coord3	pos;
 	t_vec3		view;
@@ -43,8 +40,7 @@ typedef enum e_type_light
 
 typedef struct s_base_light
 {
-	void			(*intersect)(void *self);
-	void			(*destroy)(void *self);
+	void			(*shadow)(void *self);
 
 	t_type_lgt		type;
 	unsigned int	col;
@@ -63,7 +59,6 @@ typedef enum e_type_object
 typedef struct s_base_object
 {
 	void			(*intersect)(void *self);
-	void			(*destroy)(void *self);
 
 	t_type_obj		type;
 	t_coord3		pos;
@@ -73,7 +68,9 @@ typedef struct s_base_object
 typedef struct s_camera_perspective
 {
 	t_base_cam	base;
-	float		fov;
+	int			fov;
+	float		focal_length;
+	t_quat		cam_rot;
 }	t_cam_persp;
 
 typedef struct s_light_ambient
@@ -107,4 +104,4 @@ typedef struct s_object_cylinder
 	float		h;
 }	t_obj_cyl;
 
-#endif /* SCENE_TYPES_H */
+#endif /* TYPES_SCENE_H */

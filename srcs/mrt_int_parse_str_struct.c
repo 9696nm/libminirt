@@ -86,7 +86,7 @@ int	mrt_int_parse_str_vecter3(const char *str, void *ptr)
 	vec.z = atof(str);
 	if (ft_isspace(*str) || *str == ',' || vec.z == NAN)
 		return (false);
-	vec = vecter_normalize(vec);
+	vec = vec3_normalize(vec);
 	*(t_vec3 *)ptr = vec;
 	return (true);
 }

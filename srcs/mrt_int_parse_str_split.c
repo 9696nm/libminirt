@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minirt_int.h"
+#include "utils_parse.h"
 
 int	mrt_int_parse_str_split(const char *src, const t_fp_maps *map)
 {

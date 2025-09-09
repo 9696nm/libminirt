@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minirt_int.h"
+#include "utils_parse.h"
 
 int	mrt_int_parse_handle_pl(t_scene *scene, const char *str)
 {

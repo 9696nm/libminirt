@@ -19,9 +19,12 @@ t_scene	*mrt_init(void)
 	scene = malloc(sizeof(t_scene));
 	if (scene == NULL)
 		return (NULL);
-	scene->pfx_used_bits = 0b0;
 	scene->num_cam = 0;
 	scene->num_lgt = 0;
 	scene->num_obj = 0;
+	scene->pfx_used_bits = 0b0;
+	scene->cam_type = 0;
+	scene->width = 0;
+	scene->height = 0;
 	return (scene);
 }

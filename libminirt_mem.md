@@ -27,3 +27,17 @@
 - atof
 - strtof
 - strtod
+
+```mermaid
+graph TD
+    A["画面座標<br/>(x, y)"] --> B["正規化座標<br/>(-1 to 1)"]
+    B --> C["カメラ座標系<br/>(local space)"]
+    C --> D["ワールド座標系<br/>(world space)"]
+    D --> E["レイ方向ベクトル<br/>(normalized)"]
+    
+    F["カメラパラメータ"] --> G["位置: pos<br/>視線方向: view<br/>FOV: fov"]
+    G --> C
+    
+    H["画面サイズ"] --> I["width x height"]
+    I --> B
+```

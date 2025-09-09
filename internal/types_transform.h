@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   types_transform.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 18:10:52 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/08/26 15:15:51 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/08/07 14:12:40 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/08/07 14:13:14 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef TYPES_TRANSFORM_H
+# define TYPES_TRANSFORM_H
 
-# define CAM_TYPE_PERSPECTIVE 0
+# include <stdlib.h>
 
-void	mrt_destroty(void *scene);
-void	*mrt_init(void);
-int		mrt_image_clear_mlx(void *img, int width, int height);
-int		mrt_image_render_mlx(void *scene, void *img, int width, int height);
-int		mrt_read_file(void *scene, const char *path);
-void	mrt_select_cam_type(void *scene, unsigned int index);
+# include "libarith.h"
 
-#endif /* MINIRT_H */ 
+typedef struct s_ndc
+{
+	float	x;
+	float	y;
+}	t_ndc;
+
+#endif /* TYPES_TRANSFORM_H */

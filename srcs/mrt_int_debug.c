@@ -19,7 +19,8 @@ void	mrt_int_debug_print_cam(t_base_cam *ptr)
 	{
 		case (CAM_PERSPECTIVE):
 			persp = (t_cam_persp *)ptr;
-			printf("fov    -> %f\n", persp->fov);
+			printf("fov    -> %i\n", persp->fov);
+			printf("fov_tan-> %f\n", persp->focal_length);
 			break ;
 		default :
 			;

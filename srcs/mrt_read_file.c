@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minirt_int.h"
+#include "utils_parse.h"
 
 static bool	has_extension(const char *path, const char *ext)
 {

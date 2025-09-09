@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt_image_clear.c                                  :+:      :+:    :+:   */
+/*   mrt_select_cam_type.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 18:55:19 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/08/26 15:28:29 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/09/05 17:32:56 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/09/05 17:32:57 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_int.h"
 
-int	mrt_image_clear(void *img, int width, int height)
+t_base_cam	*mrt_int_get_cam_type(t_scene *scene)
 {
-	t_img_info	info;
+	unsigned int	cam_id;
 
-	info.addr = mlx_get_data_addr(img, &info.bits_per_pixel, &info.size_line,
-			&info.endian);
-	info.width = width;
-	info.height = height;
-	ft_bzero(info.addr, width * height * (info.bits_per_pixel / 8));
-	return (0);
+	cam_id = 0;
+	while (cam_id < scene->num_cam)
+	{
+		if (scene->cameras[cam_id]->type == scene->cam_type)
+			return (scene->cameras[cam_id]);
+		cam_id++;
+	}
+	return (NULL);
 }

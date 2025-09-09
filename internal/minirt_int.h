@@ -28,13 +28,14 @@
 # include "get_next_line.h"
 # include "libarith.h"
 
-# include "mlx_types.h"
-# include "scene_types.h"
+# include "types_scene.h"
+# include "types_transform.h"
 
+
+/* number of scene */
 # define MAX_CAMERAS 4
 # define MAX_LIGHTS 8
 # define MAX_OBJECTS 128
-# define RT_FILE_EXTENSION ".rt"
 
 /*  error messege  */
 # define ERR_INVALID_EXTENSION "Error: scene file must have a '.rt' \
@@ -44,6 +45,8 @@ for the given input.\n"
 # define ERR_MULTIPLE_UNIQUE_PREFIXES "Error: multiple mutually-exclusive \
 prefixes detected.\n"
 # define ERR_INVALID_VALUE "Error: invalid value detected in line \"%s\".\n"
+# define ERR_NO_MATCHING_CAMERA_INDEX "Error: no matching camera indices \
+\"%d\".\n"
 
 typedef struct s_scene
 {
@@ -54,39 +57,15 @@ typedef struct s_scene
 	t_base_obj		*objects[MAX_OBJECTS];
 	unsigned int	num_obj;
 	u_int32_t		pfx_used_bits;
+
+	unsigned int	cam_type;
+
+	unsigned int	width;	// need?
+	unsigned int	height;
+
+	float			aspect_ratio;
+	t_ndc			ndc_norm;
 }	t_scene;
-
-/*  parse_module  */
-typedef struct s_prefix_handler
-{
-	int			(*hdl)(t_scene *, const char *);
-	const char	*pfx;
-}	t_pfx_hdl;
-
-typedef struct s_func_ptr_maps
-{
-	int		(*fnc)(const char *, void *);
-	void	*ptr;
-}	t_fp_maps;
-
-/* mrt_int_parse_handler */
-int		mrt_int_parse_handle_a(t_scene *scene, const char *str);
-int		mrt_int_parse_handle_c(t_scene *scene, const char *str);
-int		mrt_int_parse_handle_l(t_scene *scene, const char *str);
-int		mrt_int_parse_handle_pl(t_scene *scene, const char *str);
-int		mrt_int_parse_handle_sp(t_scene *scene, const char *str);
-int		mrt_int_parse_handle_cy(t_scene *scene, const char *str);
-int		mrt_int_parse_handle_default(t_scene *scene, const char *str);
-
-/* mrt_int_parse_str */
-int		mrt_int_parse_str_split(const char *src, const t_fp_maps *map);
-int		mrt_int_parse_str_bright(const char *str, void *ptr);
-int		mrt_int_parse_str_ufloat(const char *str, void *ptr);
-int		mrt_int_parse_str_fov(const char *str, void *ptr);
-int		mrt_int_parse_str_color(const char *str, void *ptr);
-int		mrt_int_parse_str_coord(const char *str, void *ptr);
-int		mrt_int_parse_str_vecter3(const char *str, void *ptr);
-
 
 /* !!!!! debug !!!!! */
 void	mrt_int_debug_print_cam(t_base_cam *ptr);

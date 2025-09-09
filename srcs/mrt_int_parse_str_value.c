@@ -40,13 +40,13 @@ int	mrt_int_parse_str_ufloat(const char *str, void *ptr)
 
 int	mrt_int_parse_str_fov(const char *str, void *ptr)
 {
-	float	fov;
+	int	fov;
 
 	if (str == NULL || ptr == NULL)
 		return (false);
-	fov = atof(str);
-	if (fov == NAN || fov < 0 || 180 < fov)
+	fov = atoi(str);
+	if (fov < 0 || 180 < fov)
 		return (false);
-	*(float *)ptr = fov;
+	*(int *)ptr = fov;
 	return (true);
 }

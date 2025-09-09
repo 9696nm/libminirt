@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   mrt_int_ray_focal_from_fov.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 18:10:52 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/08/26 15:15:51 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/09/06 16:56:19 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/09/06 16:56:20 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "utils_render.h"
 
-# define CAM_TYPE_PERSPECTIVE 0
+float	mrt_int_ray_focal_from_fov(int fov)
+{
+	float		tan_val;
 
-void	mrt_destroty(void *scene);
-void	*mrt_init(void);
-int		mrt_image_clear_mlx(void *img, int width, int height);
-int		mrt_image_render_mlx(void *scene, void *img, int width, int height);
-int		mrt_read_file(void *scene, const char *path);
-void	mrt_select_cam_type(void *scene, unsigned int index);
-
-#endif /* MINIRT_H */ 
+	if (fov <= 0)
+		return (FOCAL_LENGTH_MAX);
+	if (180 <= fov)
+		return (0.0f);
+	tan_val = tanf((float)fov * M_PI / 360.0f);
+	return (1.0f / tan_val);
+}
