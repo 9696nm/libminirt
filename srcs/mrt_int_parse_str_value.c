@@ -18,7 +18,7 @@ int	mrt_int_parse_str_bright(const char *str, void *ptr)
 
 	if (str == NULL || ptr == NULL)
 		return (false);
-	fl = atof(str);
+	fl = lite_atof(str);
 	if (fl == NAN || fl < 0.0f || 1.0f < fl)
 		return (false);
 	*(unsigned char *)ptr = (unsigned char)(fl * 255.0f + 0.5f);
@@ -31,7 +31,7 @@ int	mrt_int_parse_str_ufloat(const char *str, void *ptr)
 
 	if (str == NULL || ptr == NULL)
 		return (false);
-	fl = atof(str);
+	fl = lite_atof(str);
 	if (fl == NAN || fl < 0)
 		return (false);
 	*(float *)ptr = fl;

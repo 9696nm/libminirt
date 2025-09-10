@@ -18,6 +18,7 @@
 # include <math.h>
 
 # include "libarith.h"
+# include "types_calculate.h"
 # include "types_scene.h"
 # include "types_ray.h"
 
@@ -44,9 +45,13 @@ float			mrt_int_intersect_cy(const t_ray *ray, void *self);
 
 /* mrt_int_lighting */
 unsigned int	mrt_int_calculate_lighting(t_scene *scene, t_ray *ray);
+int				mrt_int_is_in_shadow(t_scene *scene, t_vec3 normal, t_dif_cal v);
+
+// int				mrt_int_is_in_shadow(t_scene *scene, t_vec3 hit_point,
+// 				t_vec3 light_dir, t_vec3 normal, float dist);
 
 /* mrt_int_ray_light_diffuse */
-t_argb			mrt_int_ray_light_diffuse_pt(t_scene scene, const t_ray *ray,
+unsigned int	mrt_int_ray_light_diffuse_pt(t_scene *scene, const t_ray *ray,
 				void *self, t_vec3 normal);
 
 /* mrt_int_ray_object_normal */

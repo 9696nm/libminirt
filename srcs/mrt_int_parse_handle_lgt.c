@@ -12,6 +12,7 @@
 
 #include "minirt_int.h"
 #include "utils_parse.h"
+#include "utils_render.h"
 
 int	mrt_int_parse_handle_a(t_scene *scene, const char *str)
 {
@@ -23,6 +24,7 @@ int	mrt_int_parse_handle_a(t_scene *scene, const char *str)
 	{NULL, NULL}};
 
 	stk.base.type = LGT_AMBIENT;
+	stk.base.diffuse = NULL;
 	if (mrt_int_parse_str_split(str + ft_strlen("A"), map) == false)
 		return (false);
 	new = malloc(sizeof(t_lgt_amb));
@@ -45,6 +47,7 @@ int	mrt_int_parse_handle_l(t_scene *scene, const char *str)
 	{NULL, NULL}};
 
 	stk.base.type = LGT_POINT;
+	stk.base.diffuse = mrt_int_ray_light_diffuse_pt;
 	if (mrt_int_parse_str_split(str + ft_strlen("L"), map) == false)
 		return (false);
 	new = malloc(sizeof(t_lgt_pt));

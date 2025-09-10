@@ -13,45 +13,48 @@
 #include "minirt_int.h"
 #include "utils_render.h"
 
-static t_argb	color_convert(t_argb c1, t_argb c2, float bias)
+static unsigned int	color_convert(const t_ray *ray, t_lgt_pt *pt,
+				float attn, float cos_angle)
 {
+	float	bright;
 	t_argb	res;
 
-	res.s_c.r = (((int)c1.s_c.r * c2.s_c.r) << 8) * bias;
-	res.s_c.g = (((int)c1.s_c.g * c2.s_c.g) << 8) * bias;
-	res.s_c.b = (((int)c1.s_c.b * c2.s_c.b) << 8) * bias;
-	return (res);
+	bright = (float)pt->base.bright / 255.0f;
+	res.s_c.r = (float)ray->colision->col.s_c.r * (float)pt->base.col.s_c.r
+		* cos_angle * bright * attn / 255.0f;
+	res.s_c.g = (float)ray->colision->col.s_c.g * (float)pt->base.col.s_c.g
+		* cos_angle * bright * attn / 255.0f;
+	res.s_c.b = (float)ray->colision->col.s_c.b * (float)pt->base.col.s_c.b
+		* cos_angle * bright * attn / 255.0f;
+	return (res.value);
 }
 
-t_argb	mrt_int_ray_light_diffuse_pt(t_scene scene, const t_ray *ray,
+unsigned int	mrt_int_ray_light_diffuse_pt(t_scene *scene, const t_ray *ray,
 		void *lgt, t_vec3 normal)
 {
 	t_argb		col;
 	float		attn;
-	float		dist;
 	float		cos_angle;
-	t_vec3		hit_point;
+	t_dif_cal	v;
 	t_lgt_pt	*pt;
 
 	pt = (t_lgt_pt *)lgt;
-	hit_point = vec3_add(coord_to_vec3(ray->cam->pos),
-	vec3_scale(ray->raycast, ray->distance));
-	light_dir = vec3_sub(coord_to_vec3(point_light->pos), hit_point);
-	dist = vec3_length(light_dir);
-	light_dir = vec3_normalize(light_dir);
-	
-	// シャドウチェック
-	if (is_in_shadow(scene, hit_point, light_dir, dist, normal))
+	v.hit_point = vec3_add(coord_to_vec3(ray->cam->pos),
+			vec3_scale(ray->raycast, ray->distance));
+	v.light_dir = vec3_sub(coord_to_vec3(pt->pos), v.hit_point);
+	v.dist = vec3_length(v.light_dir);
+	v.light_dir = vec3_normalize(v.light_dir);
+	col.value = 0;
+	if (mrt_int_is_in_shadow(scene, normal, v) == false)
 	{
-		cos_angle = vec3_dot(normal, light_dir);
+		cos_angle = vec3_dot(normal, v.light_dir);
 		if (0.0f < cos_angle)
 		{
-			attn = 1.0f / (0.2f + 0.02f * dist + 0.001f * dist * dist);
+			attn = 1.0f / (0.2f + 0.02f * v.dist + 0.001f * v.dist * v.dist);
 			if (attn < 0.1f)
 				attn = 0.1f;
-			col = color_convert(ray->colision->col, pt->base.col,
-					(float)pt->base.bright * cos_angle * attn / 255.0f);
+			col.value = color_convert(ray, pt, attn, cos_angle);
 		}
 	}
-	return (col);
+	return (col.value);
 }

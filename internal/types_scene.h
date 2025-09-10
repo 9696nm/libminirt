@@ -17,6 +17,7 @@
 
 # include "libarith.h"
 
+typedef struct s_scene	t_scene;
 typedef struct s_ray	t_ray;
 
 typedef union u_argb
@@ -63,7 +64,7 @@ typedef struct s_base_camera
 
 typedef struct s_base_light
 {
-	t_argb			(*diffuse)(const t_ray *, void *, t_vec3);
+	unsigned int	(*diffuse)(t_scene *, const t_ray *, void *, t_vec3);
 	t_type_lgt		type;
 	t_argb			col;
 	unsigned char	bright;

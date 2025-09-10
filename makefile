@@ -50,6 +50,7 @@ SRCS			=	mrt_destroy.c \
 					mrt_int_pixel_color.c \
 					mrt_int_pixel_raycast.c \
 					mrt_int_ray_focal_from_fov.c \
+					mrt_int_ray_light_diffuse.c \
 					mrt_int_ray_object_normal.c \
 					mrt_read_file.c \
 					mrt_select_cam_type.c \

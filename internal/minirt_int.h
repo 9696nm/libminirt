@@ -56,12 +56,7 @@ typedef struct s_scene
 	t_base_obj		*objects[MAX_OBJECTS];
 	unsigned int	num_obj;
 	u_int32_t		pfx_used_bits;
-
 	unsigned int	cam_type;
-
-	unsigned int	width;	// need?
-	unsigned int	height;
-
 	float			aspect_ratio;
 	t_ndc			ndc_norm;
 }	t_scene;

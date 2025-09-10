@@ -54,15 +54,15 @@ int	mrt_int_parse_str_coord(const char *str, void *ptr)
 
 	if (str == NULL || ptr == NULL)
 		return (false);
-	coord.x = atof(str);
+	coord.x = lite_atof(str);
 	if (ft_isspace(*str) || *str == ',' || coord.x == NAN)
 		return (false);
 	str += next_comma(str);
-	coord.y = atof(str);
+	coord.y = lite_atof(str);
 	if (ft_isspace(*str) || *str == ',' || coord.y == NAN)
 		return (false);
 	str += next_comma(str);
-	coord.z = atof(str);
+	coord.z = lite_atof(str);
 	if (ft_isspace(*str) || *str == ',' || coord.z == NAN)
 		return (false);
 	*(t_coord3 *)ptr = coord;
@@ -75,15 +75,15 @@ int	mrt_int_parse_str_vecter3(const char *str, void *ptr)
 
 	if (str == NULL || ptr == NULL)
 		return (false);
-	vec.x = atof(str);
+	vec.x = lite_atof(str);
 	if (ft_isspace(*str) || *str == ',' || vec.x == NAN)
 		return (false);
 	str += next_comma(str);
-	vec.y = atof(str);
+	vec.y = lite_atof(str);
 	if (ft_isspace(*str) || *str == ',' || vec.y == NAN)
 		return (false);
 	str += next_comma(str);
-	vec.z = atof(str);
+	vec.z = lite_atof(str);
 	if (ft_isspace(*str) || *str == ',' || vec.z == NAN)
 		return (false);
 	vec = vec3_normalize(vec);
