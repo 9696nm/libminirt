@@ -39,7 +39,8 @@ SRCS			=	mrt_destroy.c \
 					mrt_image_clear_mlx.c \
 					mrt_image_render_mlx.c \
 					mrt_init.c \
-					mrt_int_intersect.c \
+					mrt_int_intersect1.c \
+					mrt_int_intersect2.c \
 					mrt_int_lighting.c \
 					mrt_int_parse_handle_cam.c \
 					mrt_int_parse_handle_lgt.c \

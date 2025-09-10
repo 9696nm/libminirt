@@ -45,14 +45,12 @@ float			mrt_int_intersect_cy(const t_ray *ray, void *self);
 
 /* mrt_int_lighting */
 unsigned int	mrt_int_calculate_lighting(t_scene *scene, t_ray *ray);
-int				mrt_int_is_in_shadow(t_scene *scene, t_vec3 normal, t_dif_cal v);
-
-// int				mrt_int_is_in_shadow(t_scene *scene, t_vec3 hit_point,
-// 				t_vec3 light_dir, t_vec3 normal, float dist);
+int				mrt_int_is_in_shadow(t_scene *scene,
+					t_vec3 normal, t_dif_cal v);
 
 /* mrt_int_ray_light_diffuse */
 unsigned int	mrt_int_ray_light_diffuse_pt(t_scene *scene, const t_ray *ray,
-				void *self, t_vec3 normal);
+					void *self, t_vec3 normal);
 
 /* mrt_int_ray_object_normal */
 t_vec3			mrt_int_ray_object_normal_sp(const t_ray *ray, void *self);

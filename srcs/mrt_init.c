@@ -24,7 +24,5 @@ t_scene	*mrt_init(void)
 	scene->num_obj = 0;
 	scene->pfx_used_bits = 0b0;
 	scene->cam_type = 0;
-	scene->width = 0;
-	scene->height = 0;
 	return (scene);
 }
