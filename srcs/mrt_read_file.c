@@ -53,6 +53,13 @@ static int	mrt_int_extract_valid_prefix(const char *buf, t_scene *scene,
 	return (ret_errmsg(-1, ERR_NO_MATCHING_PREFIX));
 }
 
+static void	puterr_str(char *errmsg, char *arg)
+{
+	ft_putstr_fd(errmsg, STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putstr_fd("\".\n", STDERR_FILENO);
+}
+
 int	mrt_int_set_array(t_scene *scene, int fd, const t_pfx_hdl *handlers)
 {
 	int		pfx_type;
@@ -73,7 +80,7 @@ int	mrt_int_set_array(t_scene *scene, int fd, const t_pfx_hdl *handlers)
 		if (handlers[(unsigned int)pfx_type].hdl(scene, buf))
 			line_cnt = mrt_int_set_array(scene, fd, handlers);
 		else if (errno == 0)
-			dprintf(STDERR_FILENO, ERR_INVALID_VALUE, buf);
+			puterr_str(ERR_INVALID_VALUE, buf);
 		if (-1 < line_cnt)
 			line_cnt++;
 	}

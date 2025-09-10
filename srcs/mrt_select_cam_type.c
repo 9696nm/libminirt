@@ -17,5 +17,9 @@ void	mrt_select_cam_type(t_scene *scene, unsigned int index)
 	if (index < CAM_UNKNOWN)
 		scene->cam_type = index;
 	else
-		dprintf(STDERR_FILENO, ERR_NO_MATCHING_CAMERA_INDEX, index);
+	{
+		ft_putstr_fd(ERR_NO_MATCHING_CAMERA_INDEX, STDERR_FILENO);
+		ft_putnbr_fd(index, STDERR_FILENO);
+		ft_putstr_fd(" .\n", STDERR_FILENO);
+	}
 }

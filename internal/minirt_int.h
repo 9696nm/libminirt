@@ -43,9 +43,8 @@ extension.\n"
 for the given input.\n"
 # define ERR_MULTIPLE_UNIQUE_PREFIXES "Error: multiple mutually-exclusive \
 prefixes detected.\n"
-# define ERR_INVALID_VALUE "Error: invalid value detected in line \"%s\".\n"
-# define ERR_NO_MATCHING_CAMERA_INDEX "Error: no matching camera indices \
-\"%d\".\n"
+# define ERR_INVALID_VALUE "Error: invalid value detected in line \""
+# define ERR_NO_MATCHING_CAMERA_INDEX "Error: no matching camera indices "
 
 typedef struct s_scene
 {
@@ -60,10 +59,5 @@ typedef struct s_scene
 	float			aspect_ratio;
 	t_ndc			ndc_norm;
 }	t_scene;
-
-/* !!!!! debug !!!!! */
-void	mrt_int_debug_print_cam(t_base_cam *ptr);
-void	mrt_int_debug_print_lgt(t_base_lgt *ptr);
-void	mrt_int_debug_print_obj(t_base_obj *ptr);
 
 #endif /* MINIRT_INT_H */

@@ -21,8 +21,8 @@ MAKEFLAGS		+=	--no-print-directory
 
 # -compile rule-
 CC				=	gcc
-# WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
-OPT_FLAGS		=	-O0
+WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
+OPT_FLAGS		=	-O3
 INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 DEPEND_FLAGS	=	-MMD -MP
 
@@ -55,7 +55,6 @@ SRCS			=	mrt_destroy.c \
 					mrt_int_ray_object_normal.c \
 					mrt_read_file.c \
 					mrt_select_cam_type.c \
-					mrt_int_debug.c #debug!!!! \
 
 TARGET_SRCS		=	$(SRCS)
 
