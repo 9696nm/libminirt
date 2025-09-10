@@ -40,6 +40,7 @@ SRCS			=	mrt_destroy.c \
 					mrt_image_render_mlx.c \
 					mrt_init.c \
 					mrt_int_intersect.c \
+					mrt_int_lighting.c \
 					mrt_int_parse_handle_cam.c \
 					mrt_int_parse_handle_lgt.c \
 					mrt_int_parse_handle_obj.c \
@@ -49,6 +50,7 @@ SRCS			=	mrt_destroy.c \
 					mrt_int_pixel_color.c \
 					mrt_int_pixel_raycast.c \
 					mrt_int_ray_focal_from_fov.c \
+					mrt_int_ray_object_normal.c \
 					mrt_read_file.c \
 					mrt_select_cam_type.c \
 					mrt_int_debug.c #debug!!!! \

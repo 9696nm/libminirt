@@ -31,7 +31,6 @@ typedef struct s_ray
 	t_base_obj	*colision;
 	float		distance;
 	t_vec3		raycast;
-	t_vec3		reflex;
 }	t_ray;
 
 #endif /* TYPES_RAY_H */

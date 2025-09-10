@@ -13,7 +13,7 @@
 #include "minirt_int.h"
 #include "utils_render.h"
 
-int	mrt_int_intersect_search(t_ray *ray, t_scene *scene)
+int	mrt_int_intersect_search(t_scene *scene, t_ray *ray)
 {
 	float			t;
 	unsigned int	index;
@@ -80,16 +80,6 @@ float	mrt_int_intersect_pl(const t_ray *ray, void *obj)
 	if (t < FLT_EPSILON)
 		return (FLT_MAX);
 	return (t);
-}
-
-static t_vec3	vec3_scale(t_vec3 v, float scale)
-{
-	t_vec3	result;
-
-	result.x = v.x * scale;
-	result.y = v.y * scale;
-	result.z = v.z * scale;
-	return (result);
 }
 
 static float	mrt_int_intersect_cy_side(const t_ray *ray, t_obj_cyl *cylinder)

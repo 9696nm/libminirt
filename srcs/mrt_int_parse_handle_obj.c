@@ -21,11 +21,12 @@ int	mrt_int_parse_handle_sp(t_scene *scene, const char *str)
 	const t_fp_maps	map[] = {
 	{mrt_int_parse_str_coord, &stk.base.pos},
 	{mrt_int_parse_str_ufloat, &stk.d},
-	{mrt_int_parse_str_color, &stk.base.col},
+	{mrt_int_parse_str_color, &stk.base.col.value},
 	{NULL, NULL}};
 
 	stk.base.type = OBJ_SPHERE;
 	stk.base.intersect = mrt_int_intersect_sp;
+	stk.base.normal = mrt_int_ray_object_normal_sp;
 	if (mrt_int_parse_str_split(str + ft_strlen("sp"), map) == false)
 		return (false);
 	stk.r = stk.d / 2.0f;
@@ -45,11 +46,12 @@ int	mrt_int_parse_handle_pl(t_scene *scene, const char *str)
 	const t_fp_maps	map[] = {
 	{mrt_int_parse_str_coord, &stk.base.pos},
 	{mrt_int_parse_str_vecter3, &stk.normal},
-	{mrt_int_parse_str_color, &stk.base.col},
+	{mrt_int_parse_str_color, &stk.base.col.value},
 	{NULL, NULL}};
 
 	stk.base.type = OBJ_PLANE;
 	stk.base.intersect = mrt_int_intersect_pl;
+	stk.base.normal = mrt_int_ray_object_normal_pl;
 	if (mrt_int_parse_str_split(str + ft_strlen("pl"), map) == false)
 		return (false);
 	new = malloc(sizeof(t_obj_pln));
@@ -70,11 +72,12 @@ int	mrt_int_parse_handle_cy(t_scene *scene, const char *str)
 	{mrt_int_parse_str_vecter3, &stk.axis},
 	{mrt_int_parse_str_ufloat, &stk.d},
 	{mrt_int_parse_str_ufloat, &stk.h},
-	{mrt_int_parse_str_color, &stk.base.col},
+	{mrt_int_parse_str_color, &stk.base.col.value},
 	{NULL, NULL}};
 
 	stk.base.type = OBJ_CYLINDER;
 	stk.base.intersect = mrt_int_intersect_cy;
+	stk.base.normal = mrt_int_ray_object_normal_cy;
 	if (mrt_int_parse_str_split(str + ft_strlen("sy"), map) == false)
 		return (false);
 	new = malloc(sizeof(t_obj_cyl));

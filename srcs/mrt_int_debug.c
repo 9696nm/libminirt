@@ -40,7 +40,7 @@ void	mrt_int_debug_print_lgt(t_base_lgt *ptr)
 	printf("type   -> %s\n", lgt_lst[ptr->type]);
 	printf("color  -> ");
 	fflush(stdout);
-	print_bits(&ptr->col, sizeof(ptr->col));
+	print_bits(&ptr->col.value, sizeof(ptr->col.value));
 	printf("bright -> %i\n", ptr->bright);
 	switch (ptr->type)
 	{
@@ -69,7 +69,7 @@ void	mrt_int_debug_print_obj(t_base_obj *ptr)
 	printf("coord  -> x:%f y:%f z:%f\n", ptr->pos.x, ptr->pos.y, ptr->pos.z);
 	printf("color  -> ");
 	fflush(stdout);
-	print_bits(&ptr->col, sizeof(ptr->col));
+	print_bits(&ptr->col.value, sizeof(ptr->col.value));
 	switch (ptr->type)
 	{
 		case (OBJ_SPHERE):

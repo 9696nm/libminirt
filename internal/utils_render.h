@@ -31,18 +31,30 @@ typedef t_vec3			(*t_trance)(t_base_cam *, t_ndc, float);
 unsigned int	mrt_int_pixel_color(t_scene *scene, int x, int y);
 
 /* mrt_int_pixel_raycast */
-int				mrt_int_pixel_raycast(t_ray *raycast,
-					t_scene *scene, int x, int y);
+int				mrt_int_pixel_raycast(t_scene *scene,
+					t_ray *raycast, int x, int y);
 t_vec3			mrt_int_pixel_raycast_perspective(t_base_cam *cam,
 					t_ndc ndc, float aspect);
 
+/* mrt_int_intersect_search */
+int				mrt_int_intersect_search(t_scene *scene, t_ray *ray);
+float			mrt_int_intersect_sp(const t_ray *ray, void *self);
+float			mrt_int_intersect_pl(const t_ray *ray, void *self);
+float			mrt_int_intersect_cy(const t_ray *ray, void *self);
+
+/* mrt_int_lighting */
+unsigned int	mrt_int_calculate_lighting(t_scene *scene, t_ray *ray);
+
+/* mrt_int_ray_light_diffuse */
+t_argb			mrt_int_ray_light_diffuse_pt(t_scene scene, const t_ray *ray,
+				void *self, t_vec3 normal);
+
+/* mrt_int_ray_object_normal */
+t_vec3			mrt_int_ray_object_normal_sp(const t_ray *ray, void *self);
+t_vec3			mrt_int_ray_object_normal_pl(const t_ray *ray, void *self);
+t_vec3			mrt_int_ray_object_normal_cy(const t_ray *ray, void *self);
+
 /* mrt_int_ray_focal_from_fov */
 float			mrt_int_ray_focal_from_fov(int fov);
-
-/* mrt_int_intersect_search */
-int				mrt_int_intersect_search(t_ray *ray, t_scene *scene);
-float			mrt_int_intersect_sp(const t_ray *ray, void *obj);
-float			mrt_int_intersect_pl(const t_ray *ray, void *obj);
-float			mrt_int_intersect_cy(const t_ray *ray, void *obj);
 
 #endif /* UTILS_RENDER_H */

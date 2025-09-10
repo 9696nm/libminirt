@@ -19,18 +19,23 @@
 
 typedef struct s_ray	t_ray;
 
+typedef union u_argb
+{
+	unsigned int		value;
+	struct
+	{
+		unsigned char	b;
+		unsigned char	g;
+		unsigned char	r;
+		unsigned char	a;
+	}	s_c;
+}	t_argb;
+
 typedef enum e_type_camera
 {
 	CAM_PERSPECTIVE,
 	CAM_UNKNOWN
 }	t_type_cam;
-
-typedef struct s_base_camera
-{
-	t_type_cam	type;
-	t_coord3	pos;
-	t_vec3		view;
-}	t_base_cam;
 
 typedef enum e_type_light
 {
@@ -39,15 +44,6 @@ typedef enum e_type_light
 	// LGT_SPOT,
 	LGT_UNKNOWN
 }	t_type_lgt;
-
-typedef struct s_base_light
-{
-	void			(*shadow)(void *self);
-
-	t_type_lgt		type;
-	unsigned int	col;
-	unsigned char	bright;
-}	t_base_lgt;
 
 typedef enum e_type_object
 {
@@ -58,13 +54,28 @@ typedef enum e_type_object
 	OBJ_UNKNOWN
 }	t_type_obj;
 
+typedef struct s_base_camera
+{
+	t_type_cam	type;
+	t_coord3	pos;
+	t_vec3		view;
+}	t_base_cam;
+
+typedef struct s_base_light
+{
+	t_argb			(*diffuse)(const t_ray *, void *, t_vec3);
+	t_type_lgt		type;
+	t_argb			col;
+	unsigned char	bright;
+}	t_base_lgt;
+
 typedef struct s_base_object
 {
-	float			(*intersect)(const t_ray *ray, void *self);
-
+	float			(*intersect)(const t_ray *, void *);
+	t_vec3			(*normal)(const t_ray *, void *);
 	t_type_obj		type;
 	t_coord3		pos;
-	unsigned int	col;
+	t_argb			col;
 }	t_base_obj;
 
 typedef struct s_camera_perspective

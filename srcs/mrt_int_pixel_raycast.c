@@ -13,7 +13,7 @@
 #include "minirt_int.h"
 #include "utils_render.h"
 
-int	mrt_int_pixel_raycast(t_ray *ray, t_scene *scene, int x, int y)
+int	mrt_int_pixel_raycast(t_scene *scene, t_ray *ray, int x, int y)
 {
 	t_ndc			ndc;
 	unsigned int	cam_id;
