@@ -44,7 +44,7 @@ int	mrt_int_parse_str_fov(const char *str, void *ptr)
 
 	if (str == NULL || ptr == NULL)
 		return (false);
-	fov = atoi(str);
+	fov = ft_atoi(str);
 	if (fov < 0 || 180 < fov)
 		return (false);
 	*(int *)ptr = fov;
