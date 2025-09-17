@@ -65,6 +65,15 @@ int	mrt_int_is_in_shadow(t_scene *scene, t_vec3 normal, t_dif_cal v)
 	return (false);
 }
 
+static unsigned char	clamp_color(int value)
+{
+	if (value < 0)
+		return (0);
+	if (255 < value)
+		return (255);
+	return ((unsigned char)value);
+}
+
 static unsigned int	calculate_point_light(t_scene *scene,
 		t_ray *ray, t_vec3 normal)
 {
@@ -80,22 +89,13 @@ static unsigned int	calculate_point_light(t_scene *scene,
 		{
 			buf.value = scene->lights[i]->diffuse
 				(scene, ray, scene->lights[i], normal);
-			total.s_c.r += buf.s_c.r;
-			total.s_c.g += buf.s_c.g;
-			total.s_c.b += buf.s_c.b;
+			total.s_c.r = clamp_color((int)total.s_c.r + buf.s_c.r);
+			total.s_c.g = clamp_color((int)total.s_c.g + buf.s_c.g);
+			total.s_c.b = clamp_color((int)total.s_c.b + buf.s_c.b);
 		}
 		i++;
 	}
 	return (total.value);
-}
-
-static unsigned char	clamp_color(int value)
-{
-	if (value < 0.)
-		return (0);
-	if (value > 255)
-		return (255);
-	return ((unsigned char)value);
 }
 
 unsigned int	mrt_int_calculate_lighting(t_scene *scene, t_ray *ray)
