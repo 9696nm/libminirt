@@ -29,6 +29,9 @@ typedef struct s_func_ptr_maps
 	void	*ptr;
 }	t_fp_maps;
 
+/* mrt_int_has_extension */
+bool	has_extension(const char *path, const char *ext);
+
 /* mrt_int_parse_handler */
 int		mrt_int_parse_handle_a(t_scene *scene, const char *str);
 int		mrt_int_parse_handle_c(t_scene *scene, const char *str);
