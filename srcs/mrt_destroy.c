@@ -12,8 +12,6 @@
 
 #include "minirt_int.h"
 
-// extern int	len;
-
 void	mrt_destroty(t_scene *scene)
 {
 	if (scene == NULL)

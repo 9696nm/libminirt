@@ -46,15 +46,3 @@ int	mrt_image_render_mlx(t_scene *scene, void *img, int width, int height)
 	}
 	return (0);
 }
-
-// int	len = 0;
-
-	// if (len % 2)
-	// 	for (int x=0; x<1; x++)
-	// 		for (int y=0; y<1; y++)
-	// 			mrt_int_pixel_set_mlx(&info, width-x, height-y, 0x87cefa);
-	// else
-	// 	for (int x=1; x<2; x++)
-	// 		for (int y=1; y<2; y++)
-	// 			mrt_int_pixel_set_mlx(&info, width-x, height-y, 0xffb6c1);
-	// len++;
