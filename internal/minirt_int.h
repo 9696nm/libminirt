@@ -31,20 +31,37 @@
 # include "types_scene.h"
 # include "types_ray.h"
 
+/* color code module */
+# ifndef COLOR_CODE
+#  define COLOR_CODE
+#  ifdef USE_BOLD_COLOR
+#   define RED		"\x1b[1;31m"
+#   define GREEN	"\x1b[1;32m"
+#   define CYAN		"\x1b[1;36m"
+#  else
+#   define RED		"\x1b[31m"
+#   define GREEN	"\x1b[32m"
+#   define CYAN		"\x1b[36m"
+#  endif
+#  define RESET		"\x1b[0m"
+# endif /* COLOR_CODE */
+
 /* number of scene */
 # define MAX_CAMERAS 4
 # define MAX_LIGHTS 8
 # define MAX_OBJECTS 128
 
 /*  error messege  */
-# define ERR_INVALID_EXTENSION "Error: scene file must have a '.rt' \
+# define ERR_INVALID_EXTENSION "Error\nscene file must have a '.rt' \
 extension.\n"
-# define ERR_NO_MATCHING_PREFIX "Error: no matching prefix found \
+# define ERR_NO_CAMERA "Error\nno camera elements found.\n"
+# define ERR_NO_MATCHING_PREFIX "Error\nno matching prefix found \
 for the given input.\n"
-# define ERR_MULTIPLE_UNIQUE_PREFIXES "Error: multiple mutually-exclusive \
+# define ERR_MULTIPLE_UNIQUE_PREFIXES "Error\nmultiple mutually-exclusive \
 prefixes detected.\n"
-# define ERR_INVALID_VALUE "Error: invalid value detected in line \""
-# define ERR_NO_MATCHING_CAMERA_INDEX "Error: no matching camera indices "
+# define ERR_INVALID_VALUE "Error\ninvalid value detected in line \"%s\".\n"
+# define ERR_NO_MATCHING_CAMERA_INDEX "Error\nno matching camera indices \
+\"%d\".\n"
 
 typedef struct s_scene
 {

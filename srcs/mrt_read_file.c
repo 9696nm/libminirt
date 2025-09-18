@@ -13,24 +13,6 @@
 #include "minirt_int.h"
 #include "utils_parse.h"
 
-static bool	has_extension(const char *path, const char *ext)
-{
-	const char	*filename;
-	const char	*dot;
-
-	if (path == NULL || ext == NULL)
-		return (false);
-	filename = ft_strrchr(path, '/');
-	if (filename == NULL)
-		filename = path;
-	else
-		filename++;
-	dot = ft_strrchr(filename, '.');
-	if (dot == NULL || ft_strcmp(filename, ext) == 0)
-		return (false);
-	return (ft_strcmp(dot, ext) == 0);
-}
-
 static int	mrt_int_extract_valid_prefix(const char *buf, t_scene *scene,
 	const t_pfx_hdl *handlers)
 {
@@ -60,7 +42,19 @@ static void	puterr_str(char *errmsg, char *arg)
 	ft_putstr_fd("\".\n", STDERR_FILENO);
 }
 
-int	mrt_int_set_array(t_scene *scene, int fd, const t_pfx_hdl *handlers)
+static int	mrt_int_parsed_check(t_scene *scene)
+{
+	if (errno == ENOMEM)
+		return (-1);
+	if ((scene->pfx_used_bits & (1U << PFX_PERSPECTIVE)) == 0)
+	{
+		ft_putstr_fd(ERR_NO_CAMERA, STDERR_FILENO);
+		return (-1);
+	}
+	return (0);
+}
+
+static int	mrt_int_set_array(t_scene *scene, int fd, const t_pfx_hdl *handlers)
 {
 	int		pfx_type;
 	int		line_cnt;
@@ -69,11 +63,7 @@ int	mrt_int_set_array(t_scene *scene, int fd, const t_pfx_hdl *handlers)
 	line_cnt = -1;
 	buf = get_next_line(fd);
 	if (buf == NULL)
-	{
-		if (errno == ENOMEM)
-			return (line_cnt);
-		return (0);
-	}
+		return (mrt_int_parsed_check(scene));
 	pfx_type = mrt_int_extract_valid_prefix(buf, scene, handlers);
 	if (-1 < pfx_type)
 	{

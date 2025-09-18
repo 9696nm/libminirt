@@ -32,6 +32,18 @@ typedef union u_argb
 	}	s_c;
 }	t_argb;
 
+typedef enum e_parse_prefix_index
+{
+	PFX_AMBIENT,
+	PFX_PERSPECTIVE,
+	PFX_LIGHT,
+	PFX_PLANE,
+	PFX_SPHERE,
+	PFX_CYLINDER,
+	PFX_COMMENTOUT,
+	PFX_UNKNOWN
+}	t_parse_pfx_id;
+
 typedef enum e_type_camera
 {
 	CAM_PERSPECTIVE,

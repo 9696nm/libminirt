@@ -50,7 +50,7 @@ unsigned int	mrt_int_ray_light_diffuse_pt(t_scene *scene, const t_ray *ray,
 		cos_angle = vec3_dot(normal, v.light_dir);
 		if (0.0f < cos_angle)
 		{
-			attn = 1.0f / (0.2f + 0.02f * v.dist + 0.001f * v.dist * v.dist);
+			attn = 1.0f / (1.0f + 0.02f * v.dist + 0.0015f * v.dist * v.dist);
 			if (attn < 0.1f)
 				attn = 0.1f;
 			col.value = color_convert(ray, pt, attn, cos_angle);
