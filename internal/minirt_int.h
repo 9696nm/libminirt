@@ -54,6 +54,7 @@
 /*  error messege  */
 # define ERR_INVALID_EXTENSION "Error\nscene file must have a '.rt' \
 extension.\n"
+# define ERR_NO_CAMERA "Error\nno camera elements found.\n"
 # define ERR_NO_MATCHING_PREFIX "Error\nno matching prefix found \
 for the given input.\n"
 # define ERR_MULTIPLE_UNIQUE_PREFIXES "Error\nmultiple mutually-exclusive \
