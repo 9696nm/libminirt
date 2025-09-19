@@ -32,7 +32,7 @@ int	mrt_int_parse_str_ufloat(const char *str, void *ptr)
 	if (str == NULL || ptr == NULL)
 		return (false);
 	fl = lite_atof(str);
-	if (fl == NAN || fl < 0)
+	if (fl == NAN || fl < 0.0f)
 		return (false);
 	*(float *)ptr = fl;
 	return (true);
