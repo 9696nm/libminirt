@@ -59,9 +59,8 @@ extension.\n"
 for the given input.\n"
 # define ERR_MULTIPLE_UNIQUE_PREFIXES "Error\nmultiple mutually-exclusive \
 prefixes detected.\n"
-# define ERR_INVALID_VALUE "Error\ninvalid value detected in line \"%s\".\n"
-# define ERR_NO_MATCHING_CAMERA_INDEX "Error\nno matching camera indices \
-\"%d\".\n"
+# define ERR_INVALID_VALUE "Error\ninvalid value detected in line \""
+# define ERR_NO_MATCHING_CAMERA_INDEX "Error\nno matching camera indices "
 
 typedef struct s_scene
 {
