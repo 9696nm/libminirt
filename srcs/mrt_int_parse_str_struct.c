@@ -76,15 +76,18 @@ int	mrt_int_parse_str_vecter3(const char *str, void *ptr)
 	if (str == NULL || ptr == NULL)
 		return (false);
 	vec.x = lite_atof(str);
-	if (ft_isspace(*str) || *str == ',' || vec.x == NAN || vec.x < -1.0f || 1.0f < vec.x)
+	if (ft_isspace(*str) || *str == ',' || vec.x == NAN
+		|| vec.x < -1.0f || 1.0f < vec.x)
 		return (false);
 	str += next_comma(str);
 	vec.y = lite_atof(str);
-	if (ft_isspace(*str) || *str == ',' || vec.y == NAN || vec.y < -1.0f || 1.0f < vec.y)
+	if (ft_isspace(*str) || *str == ',' || vec.y == NAN
+		|| vec.y < -1.0f || 1.0f < vec.y)
 		return (false);
 	str += next_comma(str);
 	vec.z = lite_atof(str);
-	if (ft_isspace(*str) || *str == ',' || vec.z == NAN || vec.z < -1.0f || 1.0f < vec.z)
+	if (ft_isspace(*str) || *str == ',' || vec.z == NAN
+		|| vec.z < -1.0f || 1.0f < vec.z)
 		return (false);
 	vec = vec3_normalize(vec);
 	*(t_vec3 *)ptr = vec;
