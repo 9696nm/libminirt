@@ -29,7 +29,7 @@ int	mrt_int_parse_handle_c(t_scene *scene, const char *str)
 		return (false);
 	stk.focal_length = mrt_int_ray_focal_from_fov(stk.fov);
 	stk.cam_rot = quat_from_to(
-			(t_vec3){0, 0, 1}, vec3_normalize(stk.base.view));
+			(t_vec3){0, 0, 1}, stk.base.view);
 	new = malloc(sizeof(t_cam_persp));
 	if (new == NULL)
 		return (false);
